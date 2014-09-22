@@ -26,20 +26,43 @@ def fall_off(size, failure_chance):
 	if fallen <= size: return fallen
 	else: return 0
 
-def simulate(dna, primer): # any others?
-	# loop over # of cycles
+def simulate(dna, primer):
+	# returns the new strand created even if
+	# too short
 	
 	# get the starting index to copy
 	# throw error if primer string not found
 	start = dna.find(primer)
 	assert start > -1, "Primer not found"
-	
+
 	length = len(dna)
-	fallOff = fall_off(length, 0.5)
-	
-	
-	
-	pass
+	fallOff = fall_off(length, 0.05)
+
+	if fallOff > length:return dna
+	else:return dna[:fallOff]
+
+def get_primer(dna, index, length):
+        # Gets the primer for the section to be
+        # coppied.  Index defines the beginning of
+        # the section.
+
+        # Check for coppies of the bases found at
+        # the beginning of the section.
+        pos = find(dna, dna[index, index + length])
+        if pos == index:
+                return dna[index, index+length]
+
+        # Looks for a suitable primer before the section
+        # to be coppied.
+        else:
+                primerFound = false
+                searchIndex = index
+                while not primerFound:
+                      searchIndex+=1
+                      assert searchIndex >= 0, "No suitable primer"
+                      pos = find(dna, dna[searchIndex, searchIndex + length])
+                      if pos == searchIndex: return dna[searchIndex, searchIndex + length]
+
 
 if __name__ == '__main__':
 	import argparse
@@ -53,8 +76,18 @@ if __name__ == '__main__':
 
 	args = vars(parser.parse_args())
 
+        # TODO generate DNA
+	dna = ""
+	cycles = 10
 
-	# TODO generate dna, primer, etc.
+	# TODO generate primer
+	# TODO check primer
+	
+	# iterate for number of cycles
+	for x in xrange(0, cycles):
+	       simulate(dna, primer) 
+	
+	
 	# TODO run simulation
 	# TODO print or somehow return statistics, even on error
 	pass
