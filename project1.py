@@ -31,7 +31,18 @@ def simulate(dna, primer): # any others?
 	pass
 
 if __name__ == '__main__':
-	# TODO get data from cmd line args
+	import argparse
+	parser = argparse.ArgumentParser(description="Simulate the pcr process at a fairly high level")
+	# n - number of base pairs
+	parser.add_argument('n', type=int)
+	# m - size of DNA segment to be amplified
+	parser.add_argument('m', type=int)
+	# p - fixed primer length
+	parser.add_argument('p', type=int)
+
+	args = vars(parser.parse_args())
+
+
 	# TODO generate dna, primer, etc.
 	# TODO run simulation
 	# TODO print or somehow return statistics, even on error
