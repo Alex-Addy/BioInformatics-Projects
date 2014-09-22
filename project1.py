@@ -28,6 +28,17 @@ def fall_off(size, failure_chance):
 
 def simulate(dna, primer): # any others?
 	# loop over # of cycles
+	
+	# get the starting index to copy
+	# throw error if primer string not found
+	start = dna.find(primer)
+	assert start > -1, "Primer not found"
+	
+	length = len(dna)
+	fallOff = fall_off(length, 0.5)
+	
+	
+	
 	pass
 
 if __name__ == '__main__':
