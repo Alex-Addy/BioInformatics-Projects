@@ -18,8 +18,6 @@ def simulate(dna, primer): # any others?
 	# loop over # of cycles
 	pass
 
-# handle the possibility of partial primers for bonus points
-
 if __name__ == '__main__':
 	# TODO get data from cmd line args
 	# TODO generate dna, primer, etc.
