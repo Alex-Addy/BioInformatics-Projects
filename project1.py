@@ -67,6 +67,18 @@ def gen_dna(length):
         BASES = ['A', 'T', 'G', 'C']
         return ''.join([random.choice(BASES) for _ in xrange(length)])
 
+# segments is a dictionary containing a tuple of the slice ranges (x, y)
+# and a value of the number of times it has been inserted into the dictionary
+def simulate(segments, primer):
+        new_segments = {} # contains all new generated segments
+        for s in segments:
+                # find primer
+                # get falloff
+                # add to dict, incrementing the value there
+                #     look at the second argument of {}.get for one way to do this
+                #     you could also just do a key in d, or key not in d, to do the check
+        return new_segments
+
 
 if __name__ == '__main__':
         import argparse
@@ -82,15 +94,14 @@ if __name__ == '__main__':
 
         # TODO generate primer
         
+        new_segs = {dna}
         # iterate for number of cycles
         for x in xrange(0, args['c']):
                 try:
-                        simulate(dna, primer)
+                        new_segs = simulate(new_segs, primer)
                 except:
                         print("Errored on cycle %d of %d." % (x, args['c']))
                         raise
-        
-        
-        # TODO run simulation
+
         # TODO print or somehow return statistics, even on error
         pass
