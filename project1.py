@@ -26,7 +26,7 @@ def fall_off(size, failure_chance):
         if fallen <= size: return fallen
         else: return 0
 
-def single_copy(source, primer):
+def single_copy(source, primer, chance=0.05):
         # returns the new strand created even if
         # too short
         
@@ -35,10 +35,10 @@ def single_copy(source, primer):
         start = source.find(primer)
         assert start > -1, "Primer not found"
 
-        fallOff = fall_off(source, 0.05)
+        fallOff = fall_off(len(source), chance)
 
-        if fallOff > length: return dna[start:]
-        else: return dna[start:fallOff]
+        if fallOff > len(source): return (dna,len(source))
+        else: return (start,fallOff)
 
 def get_primer(dna, index, length):
         # Gets the primer for the section to be
