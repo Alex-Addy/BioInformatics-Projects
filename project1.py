@@ -99,9 +99,11 @@ if __name__ == '__main__':
         for x in xrange(0, args['c']):
                 try:
                         new_segs = simulate(new_segs, primer)
-                except:
-                        print("Errored on cycle %d of %d." % (x, args['c']))
-                        raise
+                except Exception as e:
+                        print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.strerror))
+                        break
+		# do some stats on the dictionary
+		# display the stats
+	# print	aggregate stats
 
-        # TODO print or somehow return statistics, even on error
         pass
