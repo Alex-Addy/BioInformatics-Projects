@@ -26,17 +26,16 @@ def fall_off(size, failure_chance):
         if fallen <= size: return fallen
         else: return 0
 
-def simulate(dna, primer):
+def single_copy(source, primer):
         # returns the new strand created even if
         # too short
         
         # get the starting index to copy
         # throw error if primer string not found
-        start = dna.find(primer)
+        start = source.find(primer)
         assert start > -1, "Primer not found"
 
-        length = len(dna)
-        fallOff = fall_off(length, 0.05)
+        fallOff = fall_off(source, 0.05)
 
         if fallOff > length: return dna[start:]
         else: return dna[start:fallOff]
@@ -80,14 +79,16 @@ if __name__ == '__main__':
         args = vars(parser.parse_args())
 
         dna = gen_dna(args['n'])
-        cycles = 10
 
         # TODO generate primer
-        # TODO check primer
         
         # iterate for number of cycles
-        for x in xrange(0, cycles):
-               simulate(dna, primer) 
+        for x in xrange(0, args['c']):
+                try:
+                        simulate(dna, primer)
+                except:
+                        print("Errored on cycle %d of %d." % (x, args['c']))
+                        raise
         
         
         # TODO run simulation
