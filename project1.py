@@ -43,13 +43,14 @@ def simulate(dna, primer):
 
 def get_primer(dna, index, length):
         # Gets the primer for the section to be
-        # coppied.  Index defines the beginning of
+        # copied.  Index defines the beginning of
         # the section.
 
-        # Check for coppies of the bases found at
+        # Check for copies of the bases found at
         # the beginning of the section.
         pos = find(dna, dna[index, index + length])
-        if pos == index:
+        if pos == index and find(dna, dna[index: index+length], pos+1):
+                # didn't find any duplicates of the proposed primer elsewhere in the sequence
                 return dna[index, index+length]
 
         # Looks for a suitable primer before the section
