@@ -65,7 +65,7 @@ def get_primer(dna, index, length):
 
 def gen_dna(length):
         BASES = ['A', 'T', 'G', 'C']
-        return str([random.choice(BASES) for _ in xrange(length)])
+        return ''.join([random.choice(BASES) for _ in xrange(length)])
 
 
 if __name__ == '__main__':
