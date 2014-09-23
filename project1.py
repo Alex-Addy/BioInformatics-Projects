@@ -64,6 +64,10 @@ def get_primer(dna, index, length):
                       pos = find(dna, dna[searchIndex: searchIndex + length])
                       if pos == searchIndex: return dna[searchIndex: searchIndex + length]
 
+def gen_dna(length):
+        BASES = ['A', 'T', 'G', 'C']
+        return str([random.choice(BASES) for _ in xrange(length)])
+
 
 if __name__ == '__main__':
         import argparse
@@ -75,8 +79,7 @@ if __name__ == '__main__':
 
         args = vars(parser.parse_args())
 
-        # TODO generate DNA
-        dna = ""
+        dna = gen_dna(args['n'])
         cycles = 10
 
         # TODO generate primer
