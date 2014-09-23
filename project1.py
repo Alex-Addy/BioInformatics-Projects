@@ -48,21 +48,21 @@ def get_primer(dna, index, length):
 
         # Check for copies of the bases found at
         # the beginning of the section.
-        pos = find(dna, dna[index, index + length])
+        pos = find(dna, dna[index: index + length])
         if pos == index and find(dna, dna[index: index+length], pos+1):
                 # didn't find any duplicates of the proposed primer elsewhere in the sequence
-                return dna[index, index+length]
+                return dna[index: index+length]
 
         # Looks for a suitable primer before the section
-        # to be coppied.
+        # to be copied.
         else:
                 primerFound = false
                 searchIndex = index
                 while not primerFound:
                       searchIndex+=1
                       assert searchIndex >= 0, "No suitable primer"
-                      pos = find(dna, dna[searchIndex, searchIndex + length])
-                      if pos == searchIndex: return dna[searchIndex, searchIndex + length]
+                      pos = find(dna, dna[searchIndex: searchIndex + length])
+                      if pos == searchIndex: return dna[searchIndex: searchIndex + length]
 
 
 if __name__ == '__main__':
