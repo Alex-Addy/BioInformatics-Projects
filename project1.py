@@ -77,31 +77,31 @@ def gen_dna(length):
 
 # segments is a dictionary containing a tuple of the slice ranges (x, y)
 # and a value of the number of times it has been inserted into the dictionary
-def simulate(segments, primer):
-        new_segments = {} # contains all new generated segments
+def simulate(segmentForward, segmentBackward, primerForward, primerBackward):
+        new_segmentForward = {} # contains all new generated segments
         for s in segments:
                 # find primer
-                primerIndex = find_primer_index_in_segment(segments, primer)
+                primerForwardIndex = find_primer_index_in_segment(segments, primer)
                 # get falloff
-                falloffIndex = -1
+                falloffForwardIndex = -1
                 # add to dict, incrementing the value there
                 #     look at the second argument of {}.get for one way to do this
                 #     you could also just do a key in d, or key not in d, to do the check
-                if primerIndex != -1:
-                        falloffIndex = find_falloff_index_in_segment(segments, primerIndex)
-                        if (primerIndex, falloffIndex) in new_segments:
-                                new_segments[(primerIndex, falloffIndex)] += 1
+                if primerForwardIndex != -1:
+                        falloffForwardIndex = find_falloff_index_forward_in_segment(segments, primerIndex)
+                        if (primerForwardIndex, falloffForwardIndex) in new_segments:
+                                new_segmentForward[(primerForwardIndex, falloffForwardIndex)] += 1
                         else:
-                                new_segments[(primerIndex, falloffIndex)] = 1
+                                new_segmentForward[(primerForwardIndex, falloffForwardIndex)] = 1
 
                 else:
                         if(primerIndex, len(segments)):        
-                                new_segments[(primerIndex, len(segments))] += 1
+                                new_segmentForward[(primerForwardIndex, len(segmentForward))] += 1
                         else:
-                                new_segments[(primerIndex, len(segments))] = 1
+                                new_segmentForward[(primerForwardIndex, len(segmentForward))] = 1
         return new_segments
 
-def find_primer_index_in_segment(segments, primer):
+def find_primer_forward_index_in_segment(segments, primer):
                 if primer in segments:
                         c = primer[0]
                         for ch in segments:
@@ -111,7 +111,7 @@ def find_primer_index_in_segment(segments, primer):
                 else:
                         return -1
 
-def find_falloff_index_in_segment(segments, primerIndex):
+def find_falloff_forward_index_in_segment(segments, primerIndex):
         x = segments[primerIndex:]
         index = fall_off(x, chance=.05)
         if index != 0:
