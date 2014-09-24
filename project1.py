@@ -101,7 +101,7 @@ def find_primer_index_in_segment(segments, primer):
                                         if segments[index:index+len(char)] == char:
                                                 return index
                 else:
-                        return -1;
+                        return -1
 
 def find_falloff_index_in_segment(segments, primerIndex):
         x = segments[primerIndex:]
@@ -111,16 +111,22 @@ def find_falloff_index_in_segment(segments, primerIndex):
         else:
                 return -1
 
-def count_number_of_DNA_fragments_in_dictionary(new_sequence):
+def count_number_of_DNA_fragments_in_dictionary(new_segment):
         numberOfFragments = 0;
-        for key in new_sequence:
-                number of Fragments += (new_sequence[key])
-        return numberOfFragments;
+        for key in new_segment:
+                number of Fragments += (new_segment[key])
+        return numberOfFragments
 
-def average_length_of_DNA_fragments_in_dictionary(new_sequence):
-        
+def average_length_of_DNA_fragments_in_dictionary(new_segment, numberOfFragments):
+        int combinedLength = 0;
+        for key in new_segment:
+                listOfTuples = list(key)
+                combinedLength += listOfTuples[1] - listOfTuples[0];
 
-def distribution_of_lengths_in_dictionary(new_sequence):
+        return combinedLength / numberOfFragments
+                
+
+def distribution_of_lengths_in_dictionary(new_segment):
 
         
 if __name__ == '__main__':
