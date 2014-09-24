@@ -75,6 +75,8 @@ def simulate(segments, primer):
                 # find primer
                 primerIndex = find_primer_index_in_segment(segments, primer)
                 # get falloff
+                if primerIndex != -1:
+                        falloffIndex = find_falloff_index_in_segment(segments, primerIndex)
                 # add to dict, incrementing the value there
                 #     look at the second argument of {}.get for one way to do this
                 #     you could also just do a key in d, or key not in d, to do the check
@@ -89,6 +91,16 @@ def find_primer_index_in_segment(segments, primer):
                                                 return index
                 else:
                         return -1;
+
+def find_falloff_index_in_segment(segments, primerIndex):
+        x = segments[primerIndex:]
+        index = fall_off(x, chance=.05)
+        if index != 0:
+                return index + primerIndex
+        else:
+                return -1;
+                 
+        
 
 if __name__ == '__main__':
         import argparse
