@@ -1,0 +1,11 @@
+Your report should include the following sections:
+
+1.     Description of PCR, you might want to include some nice pictures;
+
+2.     The data structures and/or algorithms you used in your computer program, with justifications for your choices, you may want to include some diagrams;
+
+3.     Discuss any implementation difficulties you encountered, and how you overcame them.
+
+4.     Results.
+
+5.     Discuss your results. How do the numbers you obtain from the simulation related to what you see on the gel which shows the PCR products.
