@@ -41,9 +41,8 @@ def single_copy(source, primer, chance=0.05):
         else: return (start,fallOff)
 
 def get_primer(dna, index, length):
-        # Gets the primer for the section to be
-        # copied.  Index defines the beginning of
-        # the section.
+        # Gets the primers for the section to be
+        # copied.  Index defines the beginning of the section.
 
         # Check for copies of the bases found at
         # the beginning of the section.
