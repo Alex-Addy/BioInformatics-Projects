@@ -14,7 +14,7 @@ Your report should include the following sections:
 
 
 
-1.
+1.  PCR, or Polymerase Chain Reaction, is a process used to create a large number of copies of part of a DNA strand.  The number of copies can order into the thousands or even millions.  The process is used in areas such as DNA cloning for sequencing and study of hereitary diseases.  The process consists of three steps: denaturation, annealing, extension.  During denaturation the source DNA strand is heathed up to split up the strand into it's complementary parts.  Next during annealing a primer is attached to the seperated strands.  The primer is designed to bind to a location on the DNA strand around the area that is being coppied.  This has to be an area where there is a sequence that is not repeated anywhere else in the DNA strand or else the primer may bind to the wrong location.  In the final step Taq polymerase is used to generate complementary bases to the strand being coppied.  This cycle is repeat over and over until the desired amount of copies are made.  The process creates new strands at an exponental rate however there is a chance that a Taq polymerase may fall off prematurly creating a reject strand.  
 
 2.
 
