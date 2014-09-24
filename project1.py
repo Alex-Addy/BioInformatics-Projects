@@ -151,6 +151,7 @@ def average_length_of_DNA_fragments_in_dictionary(new_segment, numberOfFragments
                 
 
 def distribution_of_lengths_in_dictionary(new_segment):
+    pass
 
         
 if __name__ == '__main__':
@@ -165,13 +166,27 @@ if __name__ == '__main__':
 
         dna = gen_dna(args['n'])
 
+<<<<<<< HEAD
         # TODO generate primer
         
         new_segs = {dna}
+=======
+	# find spot for duplication
+	while args['n'] - start_0 > 200:
+		start = random.randint(args['m'] + 1, args['n'] - 1)
+	end = start + args['m']
+
+	prime_0 = get_primer(dna_strands[0], start, args['m'])
+        prime_1 = get_primer(dna_strands[1][::-1], len(dna_strands[1]) - end, args['m'])
+        
+        new_segs = {(0, len(dna_strands[0])), (0, len(dna_strands))}
+	strands_f = {(0,-1)}
+	strands_b = {(0,-1)}
+>>>>>>> origin/master
         # iterate for number of cycles
         for x in xrange(0, args['c']):
                 try:
-                        new_segs = simulate(new_segs, primer)
+                        strands_f, strands_b = simulate(strands_f, strands_b, primers)
                 except Exception as e:
                         print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.strerror))
                         break
