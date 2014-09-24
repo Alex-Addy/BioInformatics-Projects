@@ -75,11 +75,22 @@ def simulate(segments, primer):
                 # find primer
                 primerIndex = find_primer_index_in_segment(segments, primer)
                 # get falloff
-                if primerIndex != -1:
-                        falloffIndex = find_falloff_index_in_segment(segments, primerIndex)
+                falloffIndex = -1
                 # add to dict, incrementing the value there
                 #     look at the second argument of {}.get for one way to do this
                 #     you could also just do a key in d, or key not in d, to do the check
+                if primerIndex != -1:
+                        falloffIndex = find_falloff_index_in_segment(segments, primerIndex)
+                        if (primerIndex, falloffIndex) in new_segments:
+                                new_segments[(primerIndex, falloffIndex)] += 1
+                        else:
+                                new_segments[(primerIndex, falloffIndex)] = 1
+
+                else:
+                        if(primerIndex, len(segments)):        
+                                new_segments[(primerIndex, len(segments))] += 1
+                        else:
+                                new_segments[(primerIndex, len(segments))] = 1
         return new_segments
 
 def find_primer_index_in_segment(segments, primer):
@@ -98,10 +109,8 @@ def find_falloff_index_in_segment(segments, primerIndex):
         if index != 0:
                 return index + primerIndex
         else:
-                return -1;
+                return -1
                  
-        
-
 if __name__ == '__main__':
         import argparse
         parser = argparse.ArgumentParser(description="Simulate the pcr process at a fairly high level")
