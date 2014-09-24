@@ -62,6 +62,14 @@ def get_primer(dna, index, length):
                       pos = find(dna, dna[searchIndex: searchIndex + length])
                       if pos == searchIndex: return dna[searchIndex: searchIndex + length]
 
+def reverse_strand(dnaStrand, geneIndex):
+        # Reverses the dna strand and returns the new index for
+        # the gene to be copied
+        # Returns the reversed strand and new gene starting index
+
+        newIndex = (len(dnaStrand) - 1) - geneIndex
+        return (dnaStrand[::-1], newIndex)
+
 def gen_dna(length):
         BASES = ['A', 'T', 'G', 'C']
         return ''.join([random.choice(BASES) for _ in xrange(length)])
@@ -130,7 +138,7 @@ def find_primer_forward_index_in_segment(segments, primer):
 def find_primer_backward_index_in_segment(segment, primer):
         index = -1;
         reverseSegment = segment[::1]
-        reversePrimer = primer[::1}
+        reversePrimer = primer[::1]
                 if reversePrimer in reverseSegment:
                         index = segments.index(primer)
                         
