@@ -73,12 +73,22 @@ def simulate(segments, primer):
         new_segments = {} # contains all new generated segments
         for s in segments:
                 # find primer
+                primerIndex = find_primer_index_in_segment(segments, primer)
                 # get falloff
                 # add to dict, incrementing the value there
                 #     look at the second argument of {}.get for one way to do this
                 #     you could also just do a key in d, or key not in d, to do the check
         return new_segments
 
+def find_primer_index_in_segment(segments, primer):
+                if primer in segments:
+                        c = primer[0]
+                        for ch in segments:
+                                if ch == c:
+                                        if segments[index:index+len(char)] == char:
+                                                return index
+                else:
+                        return -1;
 
 if __name__ == '__main__':
         import argparse
