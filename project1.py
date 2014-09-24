@@ -137,8 +137,8 @@ def find_primer_backward_index_in_segment(segment, primer):
     index = -1;
     reverseSegment = segment[::1]
     reversePrimer = primer[::1]
-        if reversePrimer in reverseSegment:
-            index = segments.index(primer)
+    if reversePrimer in reverseSegment:
+        index = segments.index(primer)
 
 def create_compliment(letters):
     newLetters
@@ -171,29 +171,30 @@ def find_falloff_backward_index_in_segment(segment, primerIndex):
         return -1
 
 def count_number_of_DNA_fragments_in_dictionary(new_segment):
-    numberOfFragments = 0;
+    numberOfFragments = 0
     for key in new_segment:
-        number of Fragments += (new_segment[key])
+        numberOfFragments += (new_segment[key])
     return numberOfFragments
 
 def average_length_of_DNA_fragments_in_dictionary(new_segment, numberOfFragments):
-    int combinedLength = 0;
+    combinedLength = 0
     for key in new_segment:
         listOfTuples = list(key)
-        combinedLength += listOfTuples[1] - listOfTuples[0];
+        combinedLength += listOfTuples[1] - listOfTuples[0]
 
     return combinedLength / numberOfFragments
 
 
 def distribution_of_lengths_in_dictionary(new_segment):
+    pass
 
 
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description="Simulate the pcr process at a fairly high level")
-    parser.add_argument('n', type=int, "size of total dna segment, in base pairs")
-    parser.add_argument('m', type=int, "size of DNA segment to analyze")
-    parser.add_argument('p', type=int, "primer length")
+    parser.add_argument('n', type=int, help="size of total dna segment, in base pairs")
+    parser.add_argument('m', type=int, help="size of DNA segment to analyze")
+    parser.add_argument('p', type=int, help="primer length")
     parser.add_argument('c', type=int, help="number of cycles to simulate")
 
     args = vars(parser.parse_args())
