@@ -155,6 +155,8 @@ if __name__ == '__main__':
 	prime_1 = get_primer(dna_strands[1], end, args['m'])
         
         new_segs = {(0, len(dna_strands[0])), (0, len(dna_strands))}
+	strands_f = {(0,-1)}
+	strands_f = {(0,-1)}
         # iterate for number of cycles
         for x in xrange(0, args['c']):
                 try:
