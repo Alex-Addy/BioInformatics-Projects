@@ -94,16 +94,16 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
         #     you could also just do a key in d, or key not in d, to do the check
         if primerForwardIndex != -1:
             falloffForwardIndex = find_falloff_index_forward_in_segment(strandForward, primerForwardIndex)
-            if (primerForwardIndex, falloffForwardIndex) in new_strandForward:
-                new_strandForward[(primerForwardIndex, falloffForwardIndex)] += 1
+            if (primerForwardIndex, falloffForwardIndex) in new_strandBackward:
+                new_strandBackward[(primerForwardIndex, falloffForwardIndex)] += 1
             else:
-                new_strandForward[(primerForwardIndex, falloffForwardIndex)] = 1
+                new_strandBackward[(primerForwardIndex, falloffForwardIndex)] = 1
 
         else:
-            if(primerForwardIndex, len(strandForward)) in new_strandForward:
-                new_strandForward[(primerForwardIndex, len(strandForward))] += 1
+            if(primerForwardIndex, len(strandForward)) in new_strandBackward:
+                new_strandBackward[(primerForwardIndex, len(strandForward))] += 1
             else:
-                new_strandForward[(primerForwardIndex, len(strandForward))] = 1
+                new_strandBackward[(primerForwardIndex, len(strandForward))] = 1
 
     for s in strandBackward:
         #find primer
@@ -112,16 +112,16 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
         falloffBackwardIndex = -1
         if primerBackwardIndex != -1:
             falloffBackwardIndex = find_falloff_index_backward_in_segment(strandBackward, primerBackwardIndex)
-            if (falloffBackwardIndex, primerBackwardIndex) in new_strandBackward:
-                new_strandBackward[(falloffBackwardIndex, primerBackwardIndex)] +=1
+            if (falloffBackwardIndex, primerBackwardIndex) in new_strandForward:
+                new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] +=1
             else:
-                new_strandBackward[(falloffBackwardIndex, primerBackwardIndex)] = 1
+                new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] = 1
 
         else:
-            if(0, primerBackwardIndex) in new_strandBackward:
-                new_strandBackward[(0, primerBackwardIndex)] +=1
+            if(0, primerBackwardIndex) in new_strandForward:
+                new_strandForward[(0, primerBackwardIndex)] +=1
             else:
-                new_strandBackward[(0, primerBackwardIndex)] = 1
+                new_strandForward[(0, primerBackwardIndex)] = 1
 
     return new_strandForward, new_strandBackward
 
