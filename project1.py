@@ -209,7 +209,7 @@ if __name__ == '__main__':
         try:
             new_segs = simulate(new_segs, primer)
         except Exception as e:
-            print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.strerror))
+            print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.message))
             break
         # do some stats on the dictionary
 
