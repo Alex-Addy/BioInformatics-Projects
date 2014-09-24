@@ -65,7 +65,16 @@ def get_primer(dna, index, length):
 
 def gen_dna(length):
         BASES = ['A', 'T', 'G', 'C']
-        return ''.join([random.choice(BASES) for _ in xrange(length)])
+        strand = ''.join([random.choice(BASES) for _ in xrange(length)])
+	new_s = strand.replace('A', 'K')
+	new_s = new_s.replace('T', 'A')
+	new_s = new_s.replace('K', 'T')
+
+	new_s = new_s.replace('G', 'K')
+	new_s = new_s.replace('C', 'G')
+	new_s = new_s.replace('K', 'C')
+
+	return (strand, new_s)
 
 # segments is a dictionary containing a tuple of the slice ranges (x, y)
 # and a value of the number of times it has been inserted into the dictionary
