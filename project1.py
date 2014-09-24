@@ -144,11 +144,17 @@ if __name__ == '__main__':
 
         args = vars(parser.parse_args())
 
-        dna = gen_dna(args['n'])
+        dna_strands = gen_dna(args['n'])
 
-        # TODO generate primer
+	# find spot for duplication
+	while args['n'] - start_0 > 200:
+		start = random.randint(args['m'] + 1, args['n'] - 1)
+	end = start + args['m']
+
+	prime_0 = get_primer(dna_strands[0], start, args['m'])
+	prime_1 = get_primer(dna_strands[1], end, args['m'])
         
-        new_segs = {dna}
+        new_segs = {(0, len(dna_strands[0])), (0, len(dna_strands))}
         # iterate for number of cycles
         for x in xrange(0, args['c']):
                 try:
@@ -160,5 +166,3 @@ if __name__ == '__main__':
 		
 		# display the stats
 	# print	aggregate stats
-
-        pass
