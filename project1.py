@@ -105,9 +105,9 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
                         else:
                                 new_strandForward[(primerForwardIndex, len(strandForward))] = 1
 
-        for s in segmentBackward:
+        for s in strandBackward:
                 #find primer
-                primerBackwardIndex = find_primer_backward_index_in_segment(segmentBackward, primer)
+                primerBackwardIndex = find_primer_backward_index_in_segment(segmentBackward, primerBackward)
                 #get falloff
                 falloffBackwardIndex = -1
                 if primerBackwardIndex != -1:
@@ -157,13 +157,21 @@ def create_compliment(letters):
         return newLetters
         
 def find_falloff_forward_index_in_segment(segments, primerIndex):
-        x = segments[primerIndex:]
+        x = len(segments[primerIndex:])
         index = fall_off(x, chance=.05)
         if index != 0:
                 return index + primerIndex
         else:
                 return -1
 
+def find_falloff_backward_index_in_segment(segment, primerIndex):
+        x = len(segments[:primerIndex])
+        index = fall_off_back(x, chance=.05)
+        if index != len(segment):
+                return index
+        else:
+                return -1
+        
 def count_number_of_DNA_fragments_in_dictionary(new_segment):
         numberOfFragments = 0;
         for key in new_segment:
