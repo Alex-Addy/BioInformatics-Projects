@@ -69,9 +69,14 @@ def gen_dna(length):
 # segments is a dictionary containing a tuple of the slice ranges (x, y)
 # and a value of the number of times it has been inserted into the dictionary
 def simulate(strandForward, strandBackward, primerForward, primerBackward):
+        #strandForward is a dictionary
+        #strandBackward is a dictionary
+        #primerForward is a string
+        #primerBackward is a string
+        
         new_strandForward = {} # contains all new generated segments
         new_strandBackward = {}
-        for s in new_strandForward:
+        for s in strandForward:
                 # find primer
                 primerForwardIndex = find_primer_index_in_segment(strandForward, primerForward)
                 # get falloff
@@ -80,24 +85,37 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
                 #     look at the second argument of {}.get for one way to do this
                 #     you could also just do a key in d, or key not in d, to do the check
                 if primerForwardIndex != -1:
-                        falloffForwardIndex = find_falloff_index_forward_in_segment(strandForward, primerIndex)
+                        falloffForwardIndex = find_falloff_index_forward_in_segment(strandForward, primerForwardIndex)
                         if (primerForwardIndex, falloffForwardIndex) in new_strandForward:
                                 new_strandForward[(primerForwardIndex, falloffForwardIndex)] += 1
                         else:
                                 new_strandForward[(primerForwardIndex, falloffForwardIndex)] = 1
 
                 else:
-                        if(primerIndex, len(new_strandForward)):        
-                                new_strandForward[(primerForwardIndex, len(segmentForward))] += 1
+                        if(primerForwardIndex, len(strandForward)) in new_strandForward:        
+                                new_strandForward[(primerForwardIndex, len(strandForward))] += 1
                         else:
-                                new_segmentForward[(primerForwardIndex, len(segmentForward))] = 1
+                                new_strandForward[(primerForwardIndex, len(strandForward))] = 1
 
         for s in segmentBackward:
                 #find primer
-                primerBackwardIndex = find_primer_backward_index_in_segment(segmentBNackward, primer)
+                primerBackwardIndex = find_primer_backward_index_in_segment(segmentBackward, primer)
                 #get falloff
-                falloffIndex = -1
-        return new_segments
+                falloffBackwardIndex = -1
+                if primerBackwardIndex != -1:
+                        falloffBackwardIndex = find_falloff_index_backward_in_segment(strandBackward, primerBackwardIndex)
+                        if (falloffBackwardIndex, primerBackwardIndex) in new_strandBackward:
+                                new_strandBackward[(falloffBackwardIndex, primerBackwardIndex)] +=1
+                        else:
+                                new_strandBackward[(falloffBackwardIndex, primerBackwardIndex)] = 1
+
+                else:
+                        if(0, primerBackwardIndex) in new_strandBackward:
+                                new_strandBackward[(0, primerBackwardIndex)] +=1
+                        else:
+                                new_strandBackward[(0, primerBackwardIndex)] = 1
+
+        return new_strandForward, new_strandBackward
 
 def find_primer_forward_index_in_segment(segments, primer):
                 if primer in segments:
@@ -145,19 +163,11 @@ if __name__ == '__main__':
 
         args = vars(parser.parse_args())
 
-        dna_strands = gen_dna(args['n'])
+        dna = gen_dna(args['n'])
 
-	# find spot for duplication
-	while args['n'] - start_0 > 200:
-		start = random.randint(args['m'] + 1, args['n'] - 1)
-	end = start + args['m']
-
-	prime_0 = get_primer(dna_strands[0], start, args['m'])
-	prime_1 = get_primer(dna_strands[1], end, args['m'])
+        # TODO generate primer
         
-        new_segs = {(0, len(dna_strands[0])), (0, len(dna_strands))}
-	strands_f = {(0,-1)}
-	strands_f = {(0,-1)}
+        new_segs = {dna}
         # iterate for number of cycles
         for x in xrange(0, args['c']):
                 try:
@@ -169,3 +179,5 @@ if __name__ == '__main__':
 		
 		# display the stats
 	# print	aggregate stats
+
+        pass
