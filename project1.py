@@ -130,9 +130,11 @@ def find_primer_forward_index_in_segment(segments, primer):
 def find_primer_backward_index_in_segment(segment, primer):
         index = -1;
         reverseSegment = segment[::1]
-        reversePrimer = primer[::1}
-                if reversePrimer in reverseSegment:
-                        index = segments.index(primer)
+        primerCompliment = create_compliment(primer)
+        reversePrimerCompliment = primerCompliment[::1]
+                if reversePrimerCompliment in reverseSegment:
+                        index = reverseSegment.index(reversePrimerCompliment) + len(primer) - 1
+        return index
                         
 def create_compliment(letters):
         newLetters
