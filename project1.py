@@ -68,26 +68,27 @@ def gen_dna(length):
 
 # segments is a dictionary containing a tuple of the slice ranges (x, y)
 # and a value of the number of times it has been inserted into the dictionary
-def simulate(segmentForward, segmentBackward, primerForward, primerBackward):
-        new_segmentForward = {} # contains all new generated segments
-        for s in segmentForward:
+def simulate(strandForward, strandBackward, primerForward, primerBackward):
+        new_strandForward = {} # contains all new generated segments
+        new_strandBackward = {}
+        for s in new_strandForward:
                 # find primer
-                primerForwardIndex = find_primer_index_in_segment(segmentForward, primer)
+                primerForwardIndex = find_primer_index_in_segment(strandForward, primerForward)
                 # get falloff
                 falloffForwardIndex = -1
                 # add to dict, incrementing the value there
                 #     look at the second argument of {}.get for one way to do this
                 #     you could also just do a key in d, or key not in d, to do the check
                 if primerForwardIndex != -1:
-                        falloffForwardIndex = find_falloff_index_forward_in_segment(segments, primerIndex)
-                        if (primerForwardIndex, falloffForwardIndex) in new_segments:
-                                new_segmentForward[(primerForwardIndex, falloffForwardIndex)] += 1
+                        falloffForwardIndex = find_falloff_index_forward_in_segment(strandForward, primerIndex)
+                        if (primerForwardIndex, falloffForwardIndex) in new_strandForward:
+                                new_strandForward[(primerForwardIndex, falloffForwardIndex)] += 1
                         else:
-                                new_segmentForward[(primerForwardIndex, falloffForwardIndex)] = 1
+                                new_strandForward[(primerForwardIndex, falloffForwardIndex)] = 1
 
                 else:
-                        if(primerIndex, len(segments)):        
-                                new_segmentForward[(primerForwardIndex, len(segmentForward))] += 1
+                        if(primerIndex, len(new_strandForward)):        
+                                new_strandForward[(primerForwardIndex, len(segmentForward))] += 1
                         else:
                                 new_segmentForward[(primerForwardIndex, len(segmentForward))] = 1
 
