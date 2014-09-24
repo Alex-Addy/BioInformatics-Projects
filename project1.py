@@ -117,23 +117,21 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
 
         return new_strandForward, new_strandBackward
 
-def find_primer_forward_index_in_segment(segments, primer):
-                if primer in segments:
-                        c = primer[0]
-                        for ch in segments:
-                                if ch == c:
-                                        if segments[index:index+len(char)] == char:
-                                                return index
-                else:
-                        return -1
+def find_primer_forward_index_in_segment(segment, primer):
+        index = -1
+        primerCompliment = create_compliment(primer)
+        if primerCompliment in segment:
+                index = segment.index(primer)
+        return index
+                
 
 def find_primer_backward_index_in_segment(segment, primer):
         index = -1;
         reverseSegment = segment[::1]
         primerCompliment = create_compliment(primer)
         reversePrimerCompliment = primerCompliment[::1]
-                if reversePrimerCompliment in reverseSegment:
-                        index = reverseSegment.index(reversePrimerCompliment) + len(primer) - 1
+        if reversePrimerCompliment in reverseSegment:
+                index = reverseSegment.index(reversePrimerCompliment) + len(primer) - 1
         return index
                         
 def create_compliment(letters):
