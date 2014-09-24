@@ -110,7 +110,19 @@ def find_falloff_index_in_segment(segments, primerIndex):
                 return index + primerIndex
         else:
                 return -1
-                 
+
+def count_number_of_DNA_fragments_in_dictionary(new_sequence):
+        numberOfFragments = 0;
+        for key in new_sequence:
+                number of Fragments += (new_sequence[key])
+        return numberOfFragments;
+
+def average_length_of_DNA_fragments_in_dictionary(new_sequence):
+        
+
+def distribution_of_lengths_in_dictionary(new_sequence):
+
+        
 if __name__ == '__main__':
         import argparse
         parser = argparse.ArgumentParser(description="Simulate the pcr process at a fairly high level")
@@ -134,6 +146,7 @@ if __name__ == '__main__':
                         print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.strerror))
                         break
 		# do some stats on the dictionary
+		
 		# display the stats
 	# print	aggregate stats
 
