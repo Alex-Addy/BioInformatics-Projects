@@ -127,6 +127,27 @@ def find_primer_forward_index_in_segment(segments, primer):
                 else:
                         return -1
 
+def find_primer_backward_index_in_segment(segment, primer):
+        index = -1;
+        reverseSegment = segment[::1]
+        reversePrimer = primer[::1}
+                if reversePrimer in reverseSegment:
+                        index = segments.index(primer)
+                        
+def create_compliment(letters):
+        newLetters
+        newLetters = string.replace(letters, "A", "K")
+        newLetters = string.replace(letters, "T", "L")
+        newLetters = stirng.replace(letters, "K", "T")
+        newLetters = string.replace(letters, "L", "A")
+
+        newLetters = string.replace(letters, "C", "D")
+        newLetters = string.replace(letters, "G", "E")
+        newLetters = string.replace(letters, "D", "G")
+        newLetters = string.replace(letters, "E", "C")
+
+        return newLetters
+        
 def find_falloff_forward_index_in_segment(segments, primerIndex):
         x = segments[primerIndex:]
         index = fall_off(x, chance=.05)
@@ -151,7 +172,6 @@ def average_length_of_DNA_fragments_in_dictionary(new_segment, numberOfFragments
                 
 
 def distribution_of_lengths_in_dictionary(new_segment):
-    pass
 
         
 if __name__ == '__main__':
@@ -166,27 +186,13 @@ if __name__ == '__main__':
 
         dna = gen_dna(args['n'])
 
-<<<<<<< HEAD
         # TODO generate primer
         
         new_segs = {dna}
-=======
-	# find spot for duplication
-	while args['n'] - start_0 > 200:
-		start = random.randint(args['m'] + 1, args['n'] - 1)
-	end = start + args['m']
-
-	prime_0 = get_primer(dna_strands[0], start, args['m'])
-        prime_1 = get_primer(dna_strands[1][::-1], len(dna_strands[1]) - end, args['m'])
-        
-        new_segs = {(0, len(dna_strands[0])), (0, len(dna_strands))}
-	strands_f = {(0,-1)}
-	strands_b = {(0,-1)}
->>>>>>> origin/master
         # iterate for number of cycles
         for x in xrange(0, args['c']):
                 try:
-                        strands_f, strands_b = simulate(strands_f, strands_b, primers)
+                        new_segs = simulate(new_segs, primer)
                 except Exception as e:
                         print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.strerror))
                         break
