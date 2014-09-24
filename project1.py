@@ -64,24 +64,15 @@ def get_primer(dna, index, length):
 
 def gen_dna(length):
         BASES = ['A', 'T', 'G', 'C']
-        strand = ''.join([random.choice(BASES) for _ in xrange(length)])
-	new_s = strand.replace('A', 'K')
-	new_s = new_s.replace('T', 'A')
-	new_s = new_s.replace('K', 'T')
-
-	new_s = new_s.replace('G', 'K')
-	new_s = new_s.replace('C', 'G')
-	new_s = new_s.replace('K', 'C')
-
-	return (strand, new_s)
+        return ''.join([random.choice(BASES) for _ in xrange(length)])
 
 # segments is a dictionary containing a tuple of the slice ranges (x, y)
 # and a value of the number of times it has been inserted into the dictionary
 def simulate(segmentForward, segmentBackward, primerForward, primerBackward):
         new_segmentForward = {} # contains all new generated segments
-        for s in segments:
+        for s in segmentForward:
                 # find primer
-                primerForwardIndex = find_primer_index_in_segment(segments, primer)
+                primerForwardIndex = find_primer_index_in_segment(segmentForward, primer)
                 # get falloff
                 falloffForwardIndex = -1
                 # add to dict, incrementing the value there
@@ -99,6 +90,12 @@ def simulate(segmentForward, segmentBackward, primerForward, primerBackward):
                                 new_segmentForward[(primerForwardIndex, len(segmentForward))] += 1
                         else:
                                 new_segmentForward[(primerForwardIndex, len(segmentForward))] = 1
+
+        for s in segmentBackward:
+                #find primer
+                primerBackwardIndex = find_primer_backward_index_in_segment(segmentBNackward, primer)
+                #get falloff
+                falloffIndex = -1
         return new_segments
 
 def find_primer_forward_index_in_segment(segments, primer):

@@ -9,3 +9,17 @@ Your report should include the following sections:
 4.     Results.
 
 5.     Discuss your results. How do the numbers you obtain from the simulation related to what you see on the gel which shows the PCR products.
+
+
+
+
+
+1.
+
+2.
+
+3.	Our initial implementation was only for a single strand of DNA.  We didn't realize that we needed to simulate both strands.  A lot of our functions were initially made with that in mind.  Locating the index of the primers became difficult because of that as we did not want to increase the complexity of the program but we also did not want to throw away the code we already wrote.  Our solution was to reverse the second strand with the primer that runs in reverse so our functions would be able to work their algorithms on it and at the end we reverse it all again to bring it back to it's original state.
+
+4.
+
+5.
