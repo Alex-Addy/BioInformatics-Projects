@@ -6,54 +6,44 @@ from __future__ import division
 import random
 # set up random
 
-def fall_off(size, failure_chance):
+def fall_off(start, end, failure_chance):
     """Uniform fall off
 
        Returns a positive integer if the found fall_off is <= size.
        Returns 0 otherwise
     """
+    assert abs(start-end) > 1, "start %d end %d" % (start, end)
     assert 1 >= failure_chance >= 0, "Failure chance is outside percent range: %r" % failure_chance
     #len(gene) * (100 / (fall off rate * 100)) == top of range
-    top_range = size / failure_chance
-    fallen = random.randint(1, top_range)
-    if fallen <= size: return fallen
-    else: return 0
+    if start < end:
+        top_range = ((end - start) // failure_chance) + start
+        fallen = random.randrange(start, top_range)
+        return fallen
+    else:
+        bot_range = ((end - start) // failure_chance)
+        fallen = random.randrange(0-start, bot_range-start, -1)
+        return fallen
 
-def single_copy(source, primer, chance=0.05):
-    # returns the new strand created even if
-    # too short
+def multi_find(src, sub):
+    '''Returns all found intstances of sub in src'''
+    findings = []
+    prev = src.find(sub)
+    while prev >= 0:
+        findings.append(prev)
+        prev = src.find(sub, prev+1)
+    return findings
 
-    # get the starting index to copy
-    # throw error if primer string not found
-    start = source.find(primer)
-    assert start > -1, "Primer not found"
-
-    fallOff = fall_off(len(source), chance)
-
-    if fallOff > len(source): return (dna,len(source))
-    else: return (start,fallOff)
-
-def get_primer(dna, index, length):
+def get_primer_i(dna, index, length):
     # Gets the primers for the section to be
     # copied.  Index defines the beginning of the section.
 
-    # Check for copies of the bases found at
-    # the beginning of the section.
-    pos = dna.find(dna[index: index + length])
-    if pos == index and dna.find(dna[index: index+length], pos+1):
-        # didn't find any duplicates of the proposed primer elsewhere in the sequence
-        return dna[index: index+length]
-
-    # Looks for a suitable primer before the section
-    # to be copied.
-    else:
-        primerFound = False
-        searchIndex = index
-        while not primerFound:
-            searchIndex+=1
-            assert searchIndex >= 0, "No suitable primer"
-            pos = dna.find(dna[searchIndex: searchIndex + length])
-            if pos == searchIndex: return dna[searchIndex: searchIndex + length]
+    found = multi_find(dna, dna[index:index+length])
+    while len(found) > 1 and index >= 0:
+        index -= 1
+        found = multi_find(dna, dna[index:index+length])
+    if index < 0:
+        raise ValueError("Couldn't find a valid primer")
+    return found[0]
 
 def reverse_strand(dnaStrand, geneIndex):
     # Reverses the dna strand and returns the new index for
@@ -82,56 +72,25 @@ def simulate(strand_norm, strand_prime, primer_f_i, primer_b_i, primer_len, chan
     # copy normal strands, become prime strands
     for s in strand_norm:
         # check that primer is contained in strand
-        if s[0] < primer_f_i and primer_f_i + primer_len < s[1]:
-            falloff = fall_off(s[0] - s[1], chance)
-            if falloff:
-                new_strand_b[(falloff, s[0])] = new_strand_b.get((falloff, s[0]), 1)
-            else:
-                new_strand_b[(s[1], s[0])] += 1
+        if s[0] <= primer_f_i and primer_f_i + primer_len <= s[1] and \
+            abs(s[0]-s[1]) > primer_len:
+            for _ in xrange(strand_norm[s]):
+                falloff = fall_off(s[1], s[0], chance)
+                if falloff < s[1]: falloff = s[1]
+                new_strand_b[(falloff, s[0])] = new_strand_b.get((falloff, s[0]), 0) + 1
 
     # copy prime strands, become normal strands
     for s in strand_prime:
-        if s[0] > primer_b_i and primer_b_i - primer_len > s[1]:
-            falloff = fall_off(s[1] - s[0], chance)
-            if falloff:
-                new_strand_f[(s[1], falloff)] = new_strand_f.get((s[1], falloff), 1)
-            else:
-                new_strand_f[(s[1], s[0])] += 1
+        if s[0] >= primer_b_i and primer_b_i - primer_len >= s[1] and \
+            abs(s[0]-s[1]) > primer_len:
+            for _ in xrange(strand_prime[s]):
+                falloff = fall_off(s[1], s[0], chance)
+                if falloff > s[0]: falloff = s[0]
+                new_strand_f[(s[1], falloff)] = new_strand_f.get((s[1], falloff), 0) + 1
 
     #return the two new dictionaries
     return new_strand_f, new_strand_b
 
-def find_primer_forward_index_in_segment(segment, primer):
-    #Function is to initialy set index to -1.
-    #Then it will create a compliment for the primer.
-    #Then it will search the passed in segment of dna for said compliment.
-    #If found, return the index of that primer.
-    #Otherwise, return the -1 to represent no found complement for the primer.
-    raise NotImplemented("Function queued for delete")
-    index = -1
-    primerCompliment = create_compliment(primer)
-    if primerCompliment in segment:
-        index = segment.index(primer)
-    return index
-
-
-def find_primer_backward_index_in_segment(segment, primer):
-    #Function is to initially set index to -1.
-    #It will then reverse the passed in segment and primer.
-    #This is because we want to search from back to front.
-    #Then it will create a compliment for the reversed primer.
-    #Then it will search the reversed segment for the reversed primer compliment.
-    #if found, get that index, re-reverse the index and segment and return the index.
-    #Otherwise return the -1 to represent no found complement for the primer.
-    index = -1
-    reverseSegment = segment[::1]
-    reversePrimer = primer[::1]
-    reversePrimerCompliment = create_compliment(reversePrimer)
-    if reversePrimer in reverseSegment:
-        index = segments.index(primer)
-        (segment, index) = reverse_strand(reverseSegment, index)
-    return index
-    
 def create_compliment(letters):
     #Function will create a compliment of the dna strand string passed in.
     newLetters = letters.replace("A", "K")
@@ -144,35 +103,23 @@ def create_compliment(letters):
 
     return newLetters
 
-def find_falloff_forward_index_in_segment(segment, primerIndex):
-    #Function will find the index where the PCR will fall off.
-    #First, get the length of the segment.
-    #Then, calculate the index of the fall off.  Index of 0 means no fall off.
-    #if fall off exists, return the index from the fall off added onto the length of the strand up until the primer.
-    #Otherwise, no fall off is found.  So the index will be the last character of the string.
-    x = len(segment[primerIndex:])
-    index = fall_off(x, chance=.05)
-    if index != 0:
-        return index + len(segment[:primerIndex])
-    else:
-        return len(segment) - 1
+def distribution_of_segment_lengths(new_f, new_b):
+    len2num = {}
+    for k, v in new_f.iteritems():
+        length = abs(k[0] - k[1])
+        if length in len2num:
+            len2num[length] += v
+        else:
+            len2num[length]  = v
 
-def find_falloff_backward_index_in_segment(segment, primerIndex):
-    #Function will find the index where the PCR will fall off
-    #First, get the length of the segment up to where the primer starts.
-    #Then, calculate the index of the fall off.  Index of 0 means no fall of.
-    #If fall off exists, return the index from the fall off.
-    #Otherwise, no fall off is found.  So the index will be the first character of the string.
-    x = len(segments[:primerIndex])
-    index = fall_off_back(x, chance=.05)
-    if index != 0:
-        return index
-    else:
-        return 0
+    for k, v in new_b.iteritems():
+        length = abs(k[0] - k[1])
+        if length in len2num:
+            len2num[length] += v
+        else:
+            len2num[length]  = v
 
-def distribution_of_lengths_in_dictionary(new_segment):
-    pass
-
+    return len2num
 
 if __name__ == '__main__':
     import argparse
@@ -189,32 +136,42 @@ if __name__ == '__main__':
     dna[1] = create_compliment(dna[0])
 
     index_f = random.randint(args['m'] + 1, args['n'] - args['m'] - 1)
-    index_b = len(dna[0]) - index_f - 1
+    index_b = index_f + args['m']
 
-    primer_f = get_primer(dna[0], index_f, args['m'])
+    primer_f_i = get_primer_i(dna[0], index_f, args['m'])
     temp_d, temp_i = reverse_strand(dna[1], index_b)
-    primer_b = get_primer(temp_d, temp_i, args['m'])[::-1]
+    primer_b_i =  (args['n'] - 1) - get_primer_i(temp_d, temp_i, args['m'])
     del temp_d, temp_i
+    print("P_f_i %d" % (primer_f_i))
+    print("P_b_i %d" % (primer_b_i))
 
-    segments_f = {(0,args['n']-1)}
-    segments_b = {(args['n']-1,0)}
+    segments_f = {(0,args['n']-1):1}
+    segments_b = {(args['n']-1,0):1}
     # iterate for number of cycles
     for x in xrange(0, args['c']):
+        chance = 0.001 * (x+1) # gives a chance that starts and stays small
         try:
-            new_f, new_b = simulate(segments_f, segments_b, primer_f, primer_b)
+            new_f, new_b = simulate(segments_f, segments_b, primer_f_i, primer_b_i, args['p'], chance)
         except Exception as e:
             print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.message))
+            raise
             break
-        print("-------------------- Cycle %d stats --------------------" % (x))
+        print("-------------------- Cycle %d stats --------------------" % (x+1))
         num_new_frags = sum(new_f.values()) + sum(new_b.values())
         print("Fragments made: %d" % (num_new_frags))
         length_created = sum((abs(s[0] - s[1]) for s in new_f)) + sum((abs(s[0] - s[1]) for s in new_b))
         print("Average length of fragments made: %f" % (length_created / num_new_frags))
-        print("New distributions: %s" % (distribution_of_new_segments(new_f, new_b)))
+        #print("New distributions: %s" % (distribution_of_segment_lengths(new_f, new_b)))
 
-        # TODO merge dictionaries
-        segments_f = new_f
-        segments_b = new_b
+        # merge dictionaries
+        for k, v in new_f.iteritems():
+            segments_f[k] = segments_f.get(k, 0) + v
+        for k, v in new_b.iteritems():
+            segments_b[k] = segments_b.get(k, 0) + v
+        #print('NF', new_f)
+        #print('F', segments_f)
+        #print('NB', new_b)
+        #print('B', segments_b)
 
     # print aggregate stats
 
