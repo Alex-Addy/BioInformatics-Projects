@@ -46,20 +46,20 @@ def get_primer(dna, index, length):
 
     # Check for copies of the bases found at
     # the beginning of the section.
-    pos = find(dna, dna[index: index + length])
-    if pos == index and find(dna, dna[index: index+length], pos+1):
+    pos = dna.find(dna[index: index + length])
+    if pos == index and dna.find(dna[index: index+length], pos+1):
         # didn't find any duplicates of the proposed primer elsewhere in the sequence
         return dna[index: index+length]
 
     # Looks for a suitable primer before the section
     # to be copied.
     else:
-        primerFound = false
+        primerFound = False
         searchIndex = index
         while not primerFound:
             searchIndex+=1
             assert searchIndex >= 0, "No suitable primer"
-            pos = find(dna, dna[searchIndex: searchIndex + length])
+            pos = dna.find(dna[searchIndex: searchIndex + length])
             if pos == searchIndex: return dna[searchIndex: searchIndex + length]
 
 def reverse_strand(dnaStrand, geneIndex):
@@ -142,13 +142,13 @@ def find_primer_backward_index_in_segment(segment, primer):
     
 def create_compliment(letters):
     #Function will create a compliment of the dna strand string passed in.
-    newLetters = string.replace(letters, "A", "K")
-    newLetters = newLetters.replace(letters, "T", "A")
-    newLetters = newLetters.replace(letters, "K", "T")
+    newLetters = letters.replace("A", "K")
+    newLetters = newLetters.replace("T", "A")
+    newLetters = newLetters.replace("K", "T")
 
-    newLetters = newLetters.replace(letters, "C", "K")
-    newLetters = newLetters.replace(letters, "G", "C")
-    newLetters = newLetters.replace(letters, "K", "G")
+    newLetters = newLetters.replace("C", "K")
+    newLetters = newLetters.replace("G", "C")
+    newLetters = newLetters.replace("K", "G")
 
     return newLetters
 
@@ -202,7 +202,7 @@ if __name__ == '__main__':
     # TODO generate primer
     primer_f = get_primer(dna[0], index_f, args['m'])
     temp_d, temp_i = reverse_strand(dna[1], index_b)
-    primer_b = get_primer(temp_d, temp_i, argsp['m'])[::-1]
+    primer_b = get_primer(temp_d, temp_i, args['m'])[::-1]
     del temp_d, temp_i
 
     segments_f = {(0,-1)}
@@ -215,7 +215,7 @@ if __name__ == '__main__':
             print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.message))
             break
         print("-------------------- Cycle %d stats --------------------" % (x))
-        num_new_frags = sum(new_f.values()) + sum(new_b.values)
+        num_new_frags = sum(new_f.values()) + sum(new_b.values())
         print("Fragments made: %d" % (num_new_frags))
         print("Average length of fragments made: %f" % (num_new_frags / (len(new_f) + len(new_b))))
         print("New distributions: %s" % (distribution_of_new_segments(new_f, new_b)))
