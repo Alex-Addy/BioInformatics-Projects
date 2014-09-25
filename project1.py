@@ -163,7 +163,7 @@ def find_falloff_forward_index_in_segment(segment, primerIndex):
     if index != 0:
         return index + primerIndex
     else:
-        return -1
+        return x - 1
 
 def find_falloff_backward_index_in_segment(segment, primerIndex):
     x = len(segments[:primerIndex])
@@ -171,7 +171,7 @@ def find_falloff_backward_index_in_segment(segment, primerIndex):
     if index != 0:
         return x - index
     else:
-        return -1
+        return 0
 
 def count_number_of_DNA_fragments_in_dictionary(new_segment):
     numberOfFragments = 0
