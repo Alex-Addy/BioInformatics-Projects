@@ -218,7 +218,7 @@ if __name__ == '__main__':
         num_new_frags = sum(new_f.values()) + sum(new_b.values)
         print("Fragments made: %d" % (num_new_frags))
         print("Average length of fragments made: %f" % (num_new_frags / (len(new_f) + len(new_b))))
-        print("New distributions: %s" % (distribution_of_new_segments(new_f, new_b))
+        print("New distributions: %s" % (distribution_of_new_segments(new_f, new_b)))
 
         # TODO merge dictionaries
         segments_f = new_f
