@@ -88,7 +88,6 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
         # find primer
         primerForwardIndex = find_primer_forward_index_in_segment(s, primerForward)
         # get falloff
-        falloffForwardIndex = -1
         # add to dict, incrementing the value there
         #     look at the second argument of {}.get for one way to do this
         #     you could also just do a key in d, or key not in d, to do the check
@@ -103,7 +102,6 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
         #find primer
         primerBackwardIndex = find_primer_backward_index_in_segment(s, primerBackward)
         #get falloff
-        falloffBackwardIndex = -1
         if primerBackwardIndex != -1:
             falloffBackwardIndex = find_falloff_index_backward_in_segment(s, primerBackwardIndex)
             if (falloffBackwardIndex, primerBackwardIndex) in new_strandForward:
