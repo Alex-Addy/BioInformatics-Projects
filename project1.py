@@ -82,15 +82,13 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
     #primerForward is a string
     #primerBackward is a string
 
-    new_strandForward = {} # contains all new generated segments
+    #Generate the two temporary dictionaries to hold the new strands
+    new_strandForward = {} 
     new_strandBackward = {}
     for s in strandForward:
         # find primer
         primerForwardIndex = find_primer_forward_index_in_segment(s, primerForward)
-        # get falloff
-        # add to dict, incrementing the value there
-        #     look at the second argument of {}.get for one way to do this
-        #     you could also just do a key in d, or key not in d, to do the check
+        #if primer exists find falloff index, add to the correct temporary dictionary.
         if primerForwardIndex != -1:
             falloffForwardIndex = find_falloff_index_forward_in_segment(s, primerForwardIndex)
             if (primerForwardIndex, falloffForwardIndex) in new_strandBackward:
@@ -101,17 +99,23 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
     for s in strandBackward:
         #find primer
         primerBackwardIndex = find_primer_backward_index_in_segment(s, primerBackward)
-        #get falloff
+        #if primer exists find falloff index, add to the correct temporary dictionary.
         if primerBackwardIndex != -1:
             falloffBackwardIndex = find_falloff_index_backward_in_segment(s, primerBackwardIndex)
             if (falloffBackwardIndex, primerBackwardIndex) in new_strandForward:
                 new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] +=1
             else:
                 new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] = 1
-                
+
+    #return the two new dictionaries
     return new_strandForward, new_strandBackward
 
 def find_primer_forward_index_in_segment(segment, primer):
+    #Function is to initialy set index to -1.
+    #Then it will create a compliment for the primer.
+    #Then it will search the passed in segment of dna for said compliment.
+    #If found, return the index of that primer.
+    #Otherwise, return the -1 to represent no found complement for the primer.
     index = -1
     primerCompliment = create_compliment(primer)
     if primerCompliment in segment:
@@ -120,6 +124,13 @@ def find_primer_forward_index_in_segment(segment, primer):
 
 
 def find_primer_backward_index_in_segment(segment, primer):
+    #Function is to initially set index to -1.
+    #It will then reverse the passed in segment and primer.
+    #This is because we want to search from back to front.
+    #Then it will create a compliment for the reversed primer.
+    #Then it will search the reversed segment for the reversed primer compliment.
+    #if found, get that index, re-reverse the index and segment and return the index.
+    #Otherwise return the -1 to represent no found complement for the primer.
     index = -1
     reverseSegment = segment[::1]
     reversePrimer = primer[::1]
@@ -130,6 +141,7 @@ def find_primer_backward_index_in_segment(segment, primer):
     return index
     
 def create_compliment(letters):
+    #Function will create a compliment of the dna strand string passed in.
     newLetters
     newLetters = string.replace(letters, "A", "K")
     newLetters = string.replace(letters, "T", "L")
@@ -144,18 +156,28 @@ def create_compliment(letters):
     return newLetters
 
 def find_falloff_forward_index_in_segment(segment, primerIndex):
+    #Function will find the index where the PCR will fall off.
+    #First, get the length of the segment.
+    #Then, calculate the index of the fall off.  Index of 0 means no fall off.
+    #if fall off exists, return the index from the fall off added onto the length of the strand up until the primer.
+    #Otherwise, no fall off is found.  So the index will be the last character of the string.
     x = len(segment[primerIndex:])
     index = fall_off(x, chance=.05)
     if index != 0:
-        return index + primerIndex
+        return index + len(segment[:primerIndex])
     else:
-        return x - 1
+        return len(segment) - 1
 
 def find_falloff_backward_index_in_segment(segment, primerIndex):
+    #Function will find the index where the PCR will fall off
+    #First, get the length of the segment up to where the primer starts.
+    #Then, calculate the index of the fall off.  Index of 0 means no fall of.
+    #If fall off exists, return the index from the fall off.
+    #Otherwise, no fall off is found.  So the index will be the first character of the string.
     x = len(segments[:primerIndex])
     index = fall_off_back(x, chance=.05)
     if index != 0:
-        return x - index
+        return index
     else:
         return 0
 
