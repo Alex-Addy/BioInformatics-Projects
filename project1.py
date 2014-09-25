@@ -142,16 +142,13 @@ def find_primer_backward_index_in_segment(segment, primer):
     
 def create_compliment(letters):
     #Function will create a compliment of the dna strand string passed in.
-    newLetters
     newLetters = string.replace(letters, "A", "K")
-    newLetters = string.replace(letters, "T", "L")
-    newLetters = stirng.replace(letters, "K", "T")
-    newLetters = string.replace(letters, "L", "A")
+    newLetters = newLetters.replace(letters, "T", "A")
+    newLetters = newLetters.replace(letters, "K", "T")
 
-    newLetters = string.replace(letters, "C", "D")
-    newLetters = string.replace(letters, "G", "E")
-    newLetters = string.replace(letters, "D", "G")
-    newLetters = string.replace(letters, "E", "C")
+    newLetters = newLetters.replace(letters, "C", "K")
+    newLetters = newLetters.replace(letters, "G", "C")
+    newLetters = newLetters.replace(letters, "K", "G")
 
     return newLetters
 
