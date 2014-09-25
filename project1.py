@@ -69,7 +69,7 @@ def gen_dna(length):
 
 # segments is a dictionary containing a tuple of the slice ranges (x, y)
 # and a value of the number of times it has been inserted into the dictionary
-def simulate(strandForward, strandBackward, primer_f_i, primer_b_i, primer_len, chance=0.05):
+def simulate(strand_norm, strand_prime, primer_f_i, primer_b_i, primer_len, chance=0.05):
     # strandForward is a dictionary containing the forward running strands
     # strandBackward is a dictionary containing the backward running strands
     # primerForward is the piece of dna that the inverse of it would connect to on forward strands
@@ -80,20 +80,26 @@ def simulate(strandForward, strandBackward, primer_f_i, primer_b_i, primer_len, 
     new_strand_b = {}
 
     # copy normal strands, become prime strands
-    for s in strandForward:
+    for s in strand_norm:
         # check that primer is contained in strand
         if s[0] < primer_f_i and primer_f_i + primer_len < s[1]:
             falloff = fall_off(s[0] - s[1], chance)
             if falloff:
-                new_strand_b = new_strand_b.get((s[0], falloff), 0) + 1
+                new_strand_b[(falloff, s[0])] = new_strand_b.get((falloff, s[0]), 1)
             else:
-                new_strand_b[s] += 1
+                new_strand_b[(s[1], s[0])] += 1
 
     # copy prime strands, become normal strands
-    for s in strandBackward:
-        raise NotImplemented()
+    for s in strand_prime:
+        if s[0] > primer_b_i and primer_b_i - primer_len > s[1]:
+            falloff = fall_off(s[1] - s[0], chance)
+            if falloff:
+                new_strand_f[(s[1], falloff)] = new_strand_f.get((s[1], falloff), 1)
+            else:
+                new_strand_f[(s[1], s[0])] += 1
+
     #return the two new dictionaries
-    return new_strandForward, new_strandBackward
+    return new_strand_f, new_strand_b
 
 def find_primer_forward_index_in_segment(segment, primer):
     #Function is to initialy set index to -1.
@@ -190,8 +196,8 @@ if __name__ == '__main__':
     primer_b = get_primer(temp_d, temp_i, args['m'])[::-1]
     del temp_d, temp_i
 
-    segments_f = {(0,-1)}
-    segments_b = {(-1,0)}
+    segments_f = {(0,args['n']-1)}
+    segments_b = {(args['n']-1,0)}
     # iterate for number of cycles
     for x in xrange(0, args['c']):
         try:
