@@ -181,21 +181,6 @@ def find_falloff_backward_index_in_segment(segment, primerIndex):
     else:
         return 0
 
-def count_number_of_DNA_fragments_in_dictionary(new_segment):
-    numberOfFragments = 0
-    for key in new_segment:
-        numberOfFragments += (new_segment[key])
-    return numberOfFragments
-
-def average_length_of_DNA_fragments_in_dictionary(new_segment, numberOfFragments):
-    combinedLength = 0
-    for key in new_segment:
-        listOfTuples = list(key)
-        combinedLength += listOfTuples[1] - listOfTuples[0]
-
-    return combinedLength / numberOfFragments
-
-
 def distribution_of_lengths_in_dictionary(new_segment):
     pass
 
