@@ -210,21 +210,38 @@ if __name__ == '__main__':
 
     args = vars(parser.parse_args())
 
-    dna = gen_dna(args['n'])
+    dna = ['','']
+    dna[0] = gen_dna(args['n'])
+    dna[1] = create_compliment(dna[0])
+
+    index_f = random.randint(args['m'] + 1, args['n'] - args['m'] - 1)
+    index_b = len(dna[0]) - index_f - 1
 
     # TODO generate primer
+    primer_f = get_primer(dna[0], index_f, args['m'])
+    temp_d, temp_i = reverse_strand(dna[1], index_b)
+    primer_b = get_primer(temp_d, temp_i, argsp['m'])[::-1]
+    del temp_d, temp_i
 
-    new_segs = {dna}
+    segments_f = {(0,-1)}
+    segments_b = {(-1,0)}
     # iterate for number of cycles
     for x in xrange(0, args['c']):
         try:
-            new_segs = simulate(new_segs, primer)
+            new_f, new_b = simulate(segments_f, segments_b, primer_f, primer_b)
         except Exception as e:
             print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.message))
             break
-        # do some stats on the dictionary
+        print("-------------------- Cycle %d stats --------------------" % (x))
+        num_new_frags = sum(new_f.values()) + sum(new_b.values)
+        print("Fragments made: %d" % (num_new_frags))
+        print("Average length of fragments made: %f" % (num_new_frags / (len(new_f) + len(new_b))))
+        print("New distributions: %s" % (distribution_of_new_segments(new_f, new_b))
 
-        # display the stats
+        # TODO merge dictionaries
+        segments_f = new_f
+        segments_b = new_b
+
     # print aggregate stats
 
     pass
