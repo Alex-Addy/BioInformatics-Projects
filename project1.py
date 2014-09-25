@@ -13,14 +13,7 @@ def fall_off(size, failure_chance):
        Returns 0 otherwise
     """
     assert 1 >= failure_chance >= 0, "Failure chance is outside percent range: %r" % failure_chance
-    #let fall off rate be 5%
-    #let size of gene be 200
-    #find out if it falls off
-    #20/0.05 == 4000
-    #get random number in range 1-4000
-    #if it is less than 200 then it falls off
     #len(gene) * (100 / (fall off rate * 100)) == top of range
-    # TODO use non-normal distribution
     top_range = size / failure_chance
     fallen = random.randint(1, top_range)
     if fallen <= size: return fallen
@@ -76,37 +69,29 @@ def gen_dna(length):
 
 # segments is a dictionary containing a tuple of the slice ranges (x, y)
 # and a value of the number of times it has been inserted into the dictionary
-def simulate(strandForward, strandBackward, primerForward, primerBackward):
-    #strandForward is a dictionary
-    #strandBackward is a dictionary
-    #primerForward is a string
-    #primerBackward is a string
+def simulate(strandForward, strandBackward, primer_f_i, primer_b_i, primer_len, chance=0.05):
+    # strandForward is a dictionary containing the forward running strands
+    # strandBackward is a dictionary containing the backward running strands
+    # primerForward is the piece of dna that the inverse of it would connect to on forward strands
+    # primerBackward is the piece of dna that the inverse of it would connect to on backward strands
 
     #Generate the two temporary dictionaries to hold the new strands
-    new_strandForward = {} 
-    new_strandBackward = {}
+    new_strand_f = {} 
+    new_strand_b = {}
+
+    # copy normal strands, become prime strands
     for s in strandForward:
-        # find primer
-        primerForwardIndex = find_primer_forward_index_in_segment(s, primerForward)
-        #if primer exists find falloff index, add to the correct temporary dictionary.
-        if primerForwardIndex != -1:
-            falloffForwardIndex = find_falloff_index_forward_in_segment(s, primerForwardIndex)
-            if (primerForwardIndex, falloffForwardIndex) in new_strandBackward:
-                new_strandBackward[(primerForwardIndex, falloffForwardIndex)] += 1
+        # check that primer is contained in strand
+        if s[0] < primer_f_i and primer_f_i + primer_len < s[1]:
+            falloff = fall_off(s[0] - s[1], chance)
+            if falloff:
+                new_strand_b = new_strand_b.get((s[0], falloff), 0) + 1
             else:
-                new_strandBackward[(primerForwardIndex, falloffForwardIndex)] = 1
+                new_strand_b[s] += 1
 
+    # copy prime strands, become normal strands
     for s in strandBackward:
-        #find primer
-        primerBackwardIndex = find_primer_backward_index_in_segment(s, primerBackward)
-        #if primer exists find falloff index, add to the correct temporary dictionary.
-        if primerBackwardIndex != -1:
-            falloffBackwardIndex = find_falloff_index_backward_in_segment(s, primerBackwardIndex)
-            if (falloffBackwardIndex, primerBackwardIndex) in new_strandForward:
-                new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] +=1
-            else:
-                new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] = 1
-
+        raise NotImplemented()
     #return the two new dictionaries
     return new_strandForward, new_strandBackward
 
@@ -116,6 +101,7 @@ def find_primer_forward_index_in_segment(segment, primer):
     #Then it will search the passed in segment of dna for said compliment.
     #If found, return the index of that primer.
     #Otherwise, return the -1 to represent no found complement for the primer.
+    raise NotImplemented("Function queued for delete")
     index = -1
     primerCompliment = create_compliment(primer)
     if primerCompliment in segment:
@@ -199,7 +185,6 @@ if __name__ == '__main__':
     index_f = random.randint(args['m'] + 1, args['n'] - args['m'] - 1)
     index_b = len(dna[0]) - index_f - 1
 
-    # TODO generate primer
     primer_f = get_primer(dna[0], index_f, args['m'])
     temp_d, temp_i = reverse_strand(dna[1], index_b)
     primer_b = get_primer(temp_d, temp_i, args['m'])[::-1]
@@ -217,7 +202,8 @@ if __name__ == '__main__':
         print("-------------------- Cycle %d stats --------------------" % (x))
         num_new_frags = sum(new_f.values()) + sum(new_b.values())
         print("Fragments made: %d" % (num_new_frags))
-        print("Average length of fragments made: %f" % (num_new_frags / (len(new_f) + len(new_b))))
+        length_created = sum((abs(s[0] - s[1]) for s in new_f)) + sum((abs(s[0] - s[1]) for s in new_b))
+        print("Average length of fragments made: %f" % (length_created / num_new_frags))
         print("New distributions: %s" % (distribution_of_new_segments(new_f, new_b)))
 
         # TODO merge dictionaries
