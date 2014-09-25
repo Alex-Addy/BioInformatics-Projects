@@ -168,8 +168,8 @@ def find_falloff_forward_index_in_segment(segment, primerIndex):
 def find_falloff_backward_index_in_segment(segment, primerIndex):
     x = len(segments[:primerIndex])
     index = fall_off_back(x, chance=.05)
-    if index != len(segment):
-        return index
+    if index != 0:
+        return x - index
     else:
         return -1
 
