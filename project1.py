@@ -99,12 +99,6 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
             else:
                 new_strandBackward[(primerForwardIndex, falloffForwardIndex)] = 1
 
-        else:
-            if(primerForwardIndex, len(strandForward)) in new_strandBackward:
-                new_strandBackward[(primerForwardIndex, len(strandForward))] += 1
-            else:
-                new_strandBackward[(primerForwardIndex, len(strandForward))] = 1
-
     for s in strandBackward:
         #find primer
         primerBackwardIndex = find_primer_backward_index_in_segment(s, primerBackward)
@@ -116,13 +110,7 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
                 new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] +=1
             else:
                 new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] = 1
-
-        else:
-            if(0, primerBackwardIndex) in new_strandForward:
-                new_strandForward[(0, primerBackwardIndex)] +=1
-            else:
-                new_strandForward[(0, primerBackwardIndex)] = 1
-
+                
     return new_strandForward, new_strandBackward
 
 def find_primer_forward_index_in_segment(segment, primer):
