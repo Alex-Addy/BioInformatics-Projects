@@ -86,14 +86,14 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
     new_strandBackward = {}
     for s in strandForward:
         # find primer
-        primerForwardIndex = find_primer_index_in_segment(strandForward, primerForward)
+        primerForwardIndex = find_primer_index_in_segment(s, primerForward)
         # get falloff
         falloffForwardIndex = -1
         # add to dict, incrementing the value there
         #     look at the second argument of {}.get for one way to do this
         #     you could also just do a key in d, or key not in d, to do the check
         if primerForwardIndex != -1:
-            falloffForwardIndex = find_falloff_index_forward_in_segment(strandForward, primerForwardIndex)
+            falloffForwardIndex = find_falloff_index_forward_in_segment(s, primerForwardIndex)
             if (primerForwardIndex, falloffForwardIndex) in new_strandBackward:
                 new_strandBackward[(primerForwardIndex, falloffForwardIndex)] += 1
             else:
@@ -107,11 +107,11 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
 
     for s in strandBackward:
         #find primer
-        primerBackwardIndex = find_primer_backward_index_in_segment(segmentBackward, primerBackward)
+        primerBackwardIndex = find_primer_backward_index_in_segment(s, primerBackward)
         #get falloff
         falloffBackwardIndex = -1
         if primerBackwardIndex != -1:
-            falloffBackwardIndex = find_falloff_index_backward_in_segment(strandBackward, primerBackwardIndex)
+            falloffBackwardIndex = find_falloff_index_backward_in_segment(s, primerBackwardIndex)
             if (falloffBackwardIndex, primerBackwardIndex) in new_strandForward:
                 new_strandForward[(falloffBackwardIndex, primerBackwardIndex)] +=1
             else:
@@ -125,7 +125,7 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
 
     return new_strandForward, new_strandBackward
 
-def find_primer_forward_index_in_segment(segments, primer):
+def find_primer_forward_index_in_segment(segment, primer):
     index = -1
     primerCompliment = create_compliment(primer)
     if primerCompliment in segment:
@@ -154,8 +154,8 @@ def create_compliment(letters):
 
     return newLetters
 
-def find_falloff_forward_index_in_segment(segments, primerIndex):
-    x = len(segments[primerIndex:])
+def find_falloff_forward_index_in_segment(segment, primerIndex):
+    x = len(segment[primerIndex:])
     index = fall_off(x, chance=.05)
     if index != 0:
         return index + primerIndex
