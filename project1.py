@@ -86,7 +86,7 @@ def simulate(strandForward, strandBackward, primerForward, primerBackward):
     new_strandBackward = {}
     for s in strandForward:
         # find primer
-        primerForwardIndex = find_primer_index_in_segment(s, primerForward)
+        primerForwardIndex = find_primer_forward_index_in_segment(s, primerForward)
         # get falloff
         falloffForwardIndex = -1
         # add to dict, incrementing the value there
@@ -134,12 +134,15 @@ def find_primer_forward_index_in_segment(segment, primer):
 
 
 def find_primer_backward_index_in_segment(segment, primer):
-    index = -1;
+    index = -1
     reverseSegment = segment[::1]
     reversePrimer = primer[::1]
+    reversePrimerCompliment = create_compliment(reversePrimer)
     if reversePrimer in reverseSegment:
         index = segments.index(primer)
-
+        (segment, index) = reverse_strand(reverseSegment, index)
+    return index
+    
 def create_compliment(letters):
     newLetters
     newLetters = string.replace(letters, "A", "K")
