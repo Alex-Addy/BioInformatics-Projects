@@ -59,7 +59,7 @@ def gen_dna(length):
 
 # segments is a dictionary containing a tuple of the slice ranges (x, y)
 # and a value of the number of times it has been inserted into the dictionary
-def simulate(strand_norm, strand_prime, primer_f_i, primer_b_i, primer_len, chance=0.05):
+def simulate(strand_norm, strand_prime, primer_f_i, primer_b_i, strand_len, chance=0.05):
     # strandForward is a dictionary containing the forward running strands
     # strandBackward is a dictionary containing the backward running strands
     # primerForward is the piece of dna that the inverse of it would connect to on forward strands
@@ -72,17 +72,19 @@ def simulate(strand_norm, strand_prime, primer_f_i, primer_b_i, primer_len, chan
     # copy normal strands, become prime strands
     for s in strand_norm:
         # check that primer is contained in strand
-        if s[0] <= primer_f_i and primer_f_i + primer_len <= s[1] and \
-            abs(s[0]-s[1]) > primer_len:
+        if s[0] <= primer_f_i and primer_f_i + strand_len <= s[1] and \
+            abs(s[0]-s[1]) > strand_len:
+	    #print(s)
             for _ in xrange(strand_norm[s]):
                 falloff = fall_off(s[1], s[0], chance)
-                if falloff < s[1]: falloff = s[1]
-                new_strand_b[(falloff, s[0])] = new_strand_b.get((falloff, s[0]), 0) + 1
+                if falloff < s[0]: falloff = s[0]
+                new_strand_b[(s[1], falloff)] = new_strand_b.get((s[1], falloff), 0) + 1
 
     # copy prime strands, become normal strands
     for s in strand_prime:
-        if s[0] >= primer_b_i and primer_b_i - primer_len >= s[1] and \
-            abs(s[0]-s[1]) > primer_len:
+        if s[0] >= primer_b_i and primer_b_i - strand_len >= s[1] and \
+            abs(s[0]-s[1]) > strand_len:
+	    #print(s)
             for _ in xrange(strand_prime[s]):
                 falloff = fall_off(s[1], s[0], chance)
                 if falloff > s[0]: falloff = s[0]
@@ -151,7 +153,7 @@ if __name__ == '__main__':
     for x in xrange(0, args['c']):
         chance = 0.001 * (x+1) # gives a chance that starts and stays small
         try:
-            new_f, new_b = simulate(segments_f, segments_b, primer_f_i, primer_b_i, args['p'], chance)
+            new_f, new_b = simulate(segments_f, segments_b, primer_f_i, primer_b_i, args['m'], chance)
         except Exception as e:
             print("Errored on cycle %d of %d.\r\nWith error %s." % (x, args['c'], e.message))
             raise
@@ -174,5 +176,8 @@ if __name__ == '__main__':
         #print('B', segments_b)
 
     # print aggregate stats
-
-    pass
+    num_frags = sum(segments_f.values()) + sum(segments_b.values())
+    print("Total fragments made: %d" % (num_frags))
+    length_created = sum((abs(s[0] - s[1]) for s in segments_f)) + sum((abs(s[0] - s[1]) for s in segments_b))
+    print("Average length of fragments made: %f" % (length_created / num_new_frags))
+    print("Distribution of lengths: %s" % (distribution_of_segment_lengths(segments_f, segments_b)))
