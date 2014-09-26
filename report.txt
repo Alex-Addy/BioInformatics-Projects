@@ -26,6 +26,6 @@ Cory Sutyak - Lead in core simulation
 
 3.	Our initial implementation was only for a single strand of DNA.  We didn't realize that we needed to simulate both strands.  A lot of our functions were initially made with that in mind.  Locating the index of the primers became difficult because of that as we did not want to increase the complexity of the program but we also did not want to throw away the code we already wrote.  Our initial solution was to reverse the second strand with the primer that runs in reverse so our functions would be able to work their algorithms on it and at the end we reverse it all again to bring it back to it's original state.  However, this proved to be way too much complexity, so we wrote functions that mirrored what the functions we already had do, just for going in the opposite direction for the other dna strand.
 
-4.
+4. Using 2000 length DNA and a 200 length segment to copy over 20 cycle with a primer length of 20 we generated 1,021,574 strands many of which were too short giving us an average length of segment 3.
 
-5.
+5.  This error in our codes was something that we couldn't overcome.  However these results do show how fast the gene replicated in the process.  The error in the code is linked to a value somewhere being clamped down to zero.
