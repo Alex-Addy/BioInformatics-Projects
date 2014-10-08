@@ -1,3 +1,5 @@
+from ProteinLookup import *
+
 #test case: aaac agc
 #output: _agc
 
@@ -79,6 +81,7 @@ def global_alignment(dna1, dna2):
             dnaFinal2 = dna2[y] + dnaFinal2
             y-=1
             inserts += 1
+            #print "Inserted"
 
         #deletion
         elif direction[y][x] == 1:
@@ -86,6 +89,7 @@ def global_alignment(dna1, dna2):
             dnaFinal2 = "_" + dnaFinal2
             x-=1
             deletes += 1
+            #print "Deleted"
 
     print "Insertions: " + str(inserts)
     print "Deletions: " + str(deletes)
@@ -96,11 +100,20 @@ def print_table(table):
     for x in range(0, len(table)):
         print table[x]
 
-#TODO: write function
 def check_mutations(dna1, dna2):
     #returns number of syn. and nonsyn. mutations
-    pass
-
+    syn = 0
+    nonsyn = 0
+    
+    for i in range(0, len(dna1), 3):
+        codon1 = dna1[i:i+3]
+        codon2 = dna2[i:i+3]
+        if codon1 != codon2 and i < len(dna1):
+            if get_protein(codon1) != get_protein(codon2):
+                syn += 1
+            else:
+                nonsyn += 1
+    return syn, nonsyn
 
 if __name__ == '__main__':
     import argparse
@@ -114,5 +127,7 @@ if __name__ == '__main__':
     dna2 = raw_input("Enter the second strand:")
 
     strand1, strand2 =  global_alignment(dna1, dna2)
-    print strand1 + '\n' + strand2
-    
+    #print strand1 + '\n' + strand2
+    syn, nonsyn = check_mutations(strand1, strand2)
+    print "Synonymous mutations: " + str(syn)
+    print "Nonsynonymous mutations: " + str(nonsyn)
