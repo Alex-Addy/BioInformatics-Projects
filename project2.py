@@ -59,7 +59,8 @@ def global_alignment(dna1, dna2):
     #table debug statement
     #print_table(table)
     #print_table(direction)
-
+    print "Final score: " + str(table[y][x])
+    
     #trace back through table
     x = lengthTop - 1
     y = lengthBot - 1
@@ -124,6 +125,7 @@ if __name__ == '__main__':
     parser.add_argument('g', type=int, help="Scoring for gap")
 
     dna1 = raw_input("Enter the first strand:")
+
     dna2 = raw_input("Enter the second strand:")
 
     strand1, strand2 =  global_alignment(dna1, dna2)
