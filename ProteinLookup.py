@@ -25,7 +25,4 @@ RNA_Codon_Table = {
 
 def get_protein(code):
     code = code.upper()
-    if code in RNA_Codon_Table:
-        return RNA_Codon_Table[code]
-    else:
-        return ''
+    RNA_Codon_Table.get(code, '')
