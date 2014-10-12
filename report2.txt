@@ -1,1 +1,29 @@
 Need 3-4 biology articles discussing ebola.
+
+
+1) Understand Genban entries at NCBI and answer the following questions for "AF086833.2"
+	i)		What's the size/length of the Ebola virus genome? What is it made of? (RNA/DNA)?
+	ii)		How many genes does Ebola virus genome contain; what are their names?
+	iii)	What does CDS mean? How many proteins does Ebola virus genome code? What are they?
+	iv)		What is polyA_signal? What's function? Can you write a program to identify them?
+2) Implement pairwise alignment in python (you group should figure out which alignment algorithm you need to use;
+3) Pairwise align 2014 sequences with (1) "The Ebola virus - Mayinga, Zaire, 1976, complete genome" and (2) "The Sudan ebolavirus strain Boniface, 1976, complete genome";
+4) Count the number of mutations and characterize each mutation. So you should have two tables like this:
+
+Zaire Ebolavirus
+-------------------------------------------------------------------------
+|    Gene    | Insertion | Deletion | Syn Mutations | Non-Syn Mutations |
+-------------------------------------------------------------------------
+| KM233118.1 |
+-------------------------------------------------------------------------
+| KM233117.1 |
+-------------------------------------------------------------------------
+
+Sudan Ebolavirus
+-------------------------------------------------------------------------
+|    Gene    | Insertion | Deletion | Syn Mutations | Non-Syn Mutations |
+-------------------------------------------------------------------------
+| KM233118.1 |
+-------------------------------------------------------------------------
+| KM233117.1 |
+-------------------------------------------------------------------------
