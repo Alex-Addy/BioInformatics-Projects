@@ -22,7 +22,7 @@ def global_alignment(dna1, dna2):
 
     #setup table
     #1 = left
-    #2 = diag
+    #2 = diagonal
     #3 = up
     #TODO: replace -2 with argument g
     for x in range(0,lengthTop):
@@ -45,7 +45,7 @@ def global_alignment(dna1, dna2):
             else:
                 diag = table[y-1][x-1] - 1
 
-            #selection process curently favors diagonals
+            #selection process currently favors diagonals
             #if a tie is present
             table[y][x] = diag
             direction[y][x]=2
@@ -102,7 +102,7 @@ def print_table(table):
         print table[x]
 
 def check_mutations(dna1, dna2):
-    #returns number of syn. and nonsyn. mutations
+    #returns number of syn. and non-syn. mutations
     syn = 0
     nonsyn = 0
     
@@ -132,4 +132,4 @@ if __name__ == '__main__':
     #print strand1 + '\n' + strand2
     syn, nonsyn = check_mutations(strand1, strand2)
     print "Synonymous mutations: " + str(syn)
-    print "Nonsynonymous mutations: " + str(nonsyn)
+    print "Non-synonymous mutations: " + str(nonsyn)
