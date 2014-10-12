@@ -14,22 +14,22 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
     lengthTop = len(dna1)
     lengthBot = len(dna2)
 
-    table = [[0 for x in xrange(lengthTop)] for x in xrange(lengthBot)]
+    table =     [[0  for x in xrange(lengthTop)] for x in xrange(lengthBot)]
     direction = [["" for x in xrange(lengthTop)] for x in xrange(lengthBot)]
 
     inserts = 0
     deletes = 0
 
-    #setup table
-    #1 = left
-    #2 = diagonal
-    #3 = up
-    #TODO: replace -2 with argument g
+    # setup table
+    # 1 = left
+    # 2 = diagonal
+    # 3 = up
+    # TODO: replace -2 with argument g
     for x in range(0,lengthTop):
-        table[0][x] = x * gap_score
+        table[0][x]     = x * gap_score
         direction[0][x] = 1
     for y in range(0,lengthBot):
-        table[y][0] = y * gap_score
+        table[y][0]     = y * gap_score
         direction[y][0] = 3
 
     #table debug statement
@@ -38,7 +38,7 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
     #calculate values
     for x in range(1,lengthTop):
         for y in range(1,lengthBot):
-            up = table[y-1][x] + gap_score
+            up = table[y-1][x]   + gap_score
             left = table[y][x-1] + gap_score
             if dna1[x] == dna2[y]:
                 diag = table[y-1][x-1] + match_score
@@ -48,13 +48,13 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
             #selection process currently favors diagonals
             #if a tie is present
             table[y][x] = diag
-            direction[y][x]=2
+            direction[y][x] = 2
             if up > table[y][x]:
-                table[y][x] = up
-                direction[y][x]=3
+                table[y][x]     = up
+                direction[y][x] = 3
             if left > table[y][x]:
-                table[y][x] = left
-                direction[y][x]=1
+                table[y][x]     = left
+                direction[y][x] = 1
 
     #table debug statement
     #print_table(table)
@@ -73,14 +73,14 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
         if direction[y][x] == 2:
             dnaFinal1 = dna1[x] + dnaFinal1
             dnaFinal2 = dna2[y] + dnaFinal2
-            x-=1
-            y-=1
+            x -= 1
+            y -= 1
             
         #insertion
         elif direction[y][x] == 3:
             dnaFinal1 = "_" + dnaFinal1
             dnaFinal2 = dna2[y] + dnaFinal2
-            y-=1
+            y -= 1
             inserts += 1
             #print "Inserted"
 
@@ -88,12 +88,12 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
         elif direction[y][x] == 1:
             dnaFinal1 = dna1[x] + dnaFinal1
             dnaFinal2 = "_" + dnaFinal2
-            x-=1
+            x -= 1
             deletes += 1
             #print "Deleted"
 
     print "Insertions: " + str(inserts)
-    print "Deletions: " + str(deletes)
+    print "Deletions: "  + str(deletes)
 
     return(dnaFinal1, dnaFinal2)
 
