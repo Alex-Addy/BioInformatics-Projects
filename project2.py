@@ -1,10 +1,10 @@
-from ProteinLookup import get_codon
+from ProteinLookup import get_protein
 
 #test case: aaac agc
 #output: _agc
 
 
-def global_alignment(dna1, dna2):
+def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
     dna1 = dna1.lower()
     dna2 = dna2.lower()
 
@@ -26,10 +26,10 @@ def global_alignment(dna1, dna2):
     #3 = up
     #TODO: replace -2 with argument g
     for x in range(0,lengthTop):
-        table[0][x] = x * -2
+        table[0][x] = x * gap_score
         direction[0][x] = 1
     for y in range(0,lengthBot):
-        table[y][0] = y * -2
+        table[y][0] = y * gap_score
         direction[y][0] = 3
 
     #table debug statement
@@ -38,12 +38,12 @@ def global_alignment(dna1, dna2):
     #calculate values
     for x in range(1,lengthTop):
         for y in range(1,lengthBot):
-            up = table[y-1][x] - 2
-            left = table[y][x-1] - 2
+            up = table[y-1][x] + gap_score
+            left = table[y][x-1] + gap_score
             if dna1[x] == dna2[y]:
-                diag = table[y-1][x-1] + 1
+                diag = table[y-1][x-1] + match_score
             else:
-                diag = table[y-1][x-1] - 1
+                diag = table[y-1][x-1] + mismatch_score
 
             #selection process currently favors diagonals
             #if a tie is present
@@ -128,13 +128,15 @@ if __name__ == '__main__':
     parser.add_argument('--gene-file-1', type=FileType, help="File containing the NCBI coding sequences")
     parser.add_argument('--gene-file-2', type=FileType, help="File containing the NCBI coding sequences")
 
+    args = vars(parser.parse_args())
+
     dna1 = raw_input("Enter the first strand:")
 
     dna2 = raw_input("Enter the second strand:")
 
     #TODO: get genes from file
 
-    strand1, strand2 =  global_alignment(dna1, dna2)
+    strand1, strand2 =  global_alignment(dna1, dna2, args['m_score'], args['i_score'], args['g_score'])
     #print strand1 + '\n' + strand2
     syn, nonsyn = check_mutations(strand1, strand2)
     print "Synonymous mutations: " + str(syn)
