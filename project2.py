@@ -1,4 +1,4 @@
-from ProteinLookup import *
+from ProteinLookup import get_codon
 
 #test case: aaac agc
 #output: _agc
@@ -102,6 +102,7 @@ def print_table(table):
         print table[x]
 
 def check_mutations(dna1, dna2):
+    '''Returns the number of synonymous and non-synonymous mutations.'''
     #returns number of syn. and non-syn. mutations
     syn = 0
     nonsyn = 0
@@ -120,13 +121,18 @@ if __name__ == '__main__':
     import argparse
     #TODO: add info
     parser = argparse.ArgumentParser(description="TODO: add info")
-    parser.add_argument('m', type=int, help="Scoring for match")
-    parser.add_argument('i', type=int, help="Scoring for mismatch")
-    parser.add_argument('g', type=int, help="Scoring for gap")
+    parser.add_argument('m_score', type=int, help="Scoring for match")
+    parser.add_argument('i_score', type=int, help="Scoring for mismatch")
+    parser.add_argument('g_score', type=int, help="Scoring for gap")
+
+    parser.add_argument('--gene-file-1', type=FileType, help="File containing the NCBI coding sequences")
+    parser.add_argument('--gene-file-2', type=FileType, help="File containing the NCBI coding sequences")
 
     dna1 = raw_input("Enter the first strand:")
 
     dna2 = raw_input("Enter the second strand:")
+
+    #TODO: get genes from file
 
     strand1, strand2 =  global_alignment(dna1, dna2)
     #print strand1 + '\n' + strand2
