@@ -95,7 +95,7 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
     print "Insertions: " + str(inserts)
     print "Deletions: "  + str(deletes)
 
-    return ''.join(dnaFinal1), ''.join(dnaFinal2)
+    return ''.join(dnaFinal1[::-1]), ''.join(dnaFinal2[::-1])
 
 def print_table(table):
     for x in range(0, len(table)):
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     parser.add_argument('--gene-file-1', type=argparse.FileType('r'), help="File containing the NCBI coding sequences")
     parser.add_argument('--gene-file-2', type=argparse.FileType('r'), help="File containing the NCBI coding sequences")
 
-    args = vars(parser.parse_args())
+    #args = vars(parser.parse_args())
 
     dna1 = raw_input("Enter the first strand:")
 
@@ -136,7 +136,7 @@ if __name__ == '__main__':
 
     #TODO: get genes from file
 
-    strand1, strand2 =  global_alignment(dna1, dna2, args['m_score'], args['i_score'], args['g_score'])
+    strand1, strand2 =  global_alignment(dna1, dna2, 1, -1, -2)
     #print strand1 + '\n' + strand2
     syn, nonsyn = check_mutations(strand1, strand2)
     print "Synonymous mutations: " + str(syn)
