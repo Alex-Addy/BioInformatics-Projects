@@ -128,7 +128,7 @@ def fastaFromFile(open_file):
         else:
             cur_gene += line.strip()
 
-def main(f1, f2, m_score, i_score, g_score)
+def main(f1, f2, m_score, i_score, g_score):
     while True:
         gen1 = fastaFromFile(f1)
         gen2 = fastaFromFile(f2)
