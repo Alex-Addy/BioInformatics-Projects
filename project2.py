@@ -65,29 +65,29 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
     x = lengthTop - 1
     y = lengthBot - 1
 
-    dnaFinal1 = ""
-    dnaFinal2 = ""
+    dnaFinal1 = []
+    dnaFinal2 = []
     while not (x == 0 and y == 0):
 
         #match
         if direction[y][x] == 2:
-            dnaFinal1 = dna1[x] + dnaFinal1
-            dnaFinal2 = dna2[y] + dnaFinal2
+            dnaFinal1.append(dna1[x])
+            dnaFinal2.append(dna2[y])
             x -= 1
             y -= 1
             
         #insertion
         elif direction[y][x] == 3:
-            dnaFinal1 = "_" + dnaFinal1
-            dnaFinal2 = dna2[y] + dnaFinal2
+            dnaFinal1.append("_")
+            dnaFinal2.append(dna2[y])
             y -= 1
             inserts += 1
             #print "Inserted"
 
         #deletion
         elif direction[y][x] == 1:
-            dnaFinal1 = dna1[x] + dnaFinal1
-            dnaFinal2 = "_" + dnaFinal2
+            dnaFinal1.append(dna1[x])
+            dnaFinal2.append("_")
             x -= 1
             deletes += 1
             #print "Deleted"
@@ -95,7 +95,7 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
     print "Insertions: " + str(inserts)
     print "Deletions: "  + str(deletes)
 
-    return(dnaFinal1, dnaFinal2)
+    return ''.join(dnaFinal1), ''.join(dnaFinal2)
 
 def print_table(table):
     for x in range(0, len(table)):
@@ -125,8 +125,8 @@ if __name__ == '__main__':
     parser.add_argument('i_score', type=int, help="Scoring for mismatch")
     parser.add_argument('g_score', type=int, help="Scoring for gap")
 
-    parser.add_argument('--gene-file-1', type=FileType, help="File containing the NCBI coding sequences")
-    parser.add_argument('--gene-file-2', type=FileType, help="File containing the NCBI coding sequences")
+    parser.add_argument('--gene-file-1', type=argparse.FileType('r'), help="File containing the NCBI coding sequences")
+    parser.add_argument('--gene-file-2', type=argparse.FileType('r'), help="File containing the NCBI coding sequences")
 
     args = vars(parser.parse_args())
 
