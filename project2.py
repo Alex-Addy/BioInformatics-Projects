@@ -103,7 +103,7 @@ def print_table(table):
 
 def check_mutations(dna1, dna2):
     '''Returns the number of synonymous and non-synonymous mutations.'''
-    #returns number of syn. and non-syn. mutations
+    # returns number of syn. and non-syn. mutations
     syn = 0
     nonsyn = 0
     
@@ -117,6 +117,31 @@ def check_mutations(dna1, dna2):
                 nonsyn += 1
     return syn, nonsyn
 
+def fastaFromFile(open_file):
+    assert type(open_file) is file, "Need an open file handle to work"
+    cur_gene = ''
+    for line in open_file:
+        if line[0] == '>':
+            if cur_gene == '': continue
+            yield cur_gene
+            cur_gene = ''
+        else:
+            cur_gene += line.strip()
+
+def main(f1, f2, m_score, i_score, g_score)
+    while True:
+        gen1 = fastaFromFile(f1)
+        gen2 = fastaFromFile(f2)
+        try:
+            strand1, strand2 = global_alignment(next(gen1), next(gen2), m_score, i_score, g_score)
+        except StopIteration:
+            return
+        print strand1
+        print strand2
+        syn, nonsyn = check_mutations(strand1, strand2)
+        print "Synonymous mutations: " + str(syn)
+        print "Non-synonymous mutations: " + str(nonsyn)
+
 if __name__ == '__main__':
     import argparse
     #TODO: add info
@@ -128,16 +153,7 @@ if __name__ == '__main__':
     parser.add_argument('--gene-file-1', type=argparse.FileType('r'), help="File containing the NCBI coding sequences")
     parser.add_argument('--gene-file-2', type=argparse.FileType('r'), help="File containing the NCBI coding sequences")
 
-    #args = vars(parser.parse_args())
+    args = vars(parser.parse_args())
 
-    dna1 = raw_input("Enter the first strand:")
+    main(args["gene-file-1"], args["gene-file-2"], args["m_score"], args["i_score"], args["g_score"])
 
-    dna2 = raw_input("Enter the second strand:")
-
-    #TODO: get genes from file
-
-    strand1, strand2 =  global_alignment(dna1, dna2, 1, -1, -2)
-    #print strand1 + '\n' + strand2
-    syn, nonsyn = check_mutations(strand1, strand2)
-    print "Synonymous mutations: " + str(syn)
-    print "Non-synonymous mutations: " + str(nonsyn)
