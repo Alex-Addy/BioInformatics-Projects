@@ -110,7 +110,7 @@ def check_mutations(dna1, dna2):
     for i in range(0, len(dna1), 3):
         codon1 = dna1[i:i+3]
         codon2 = dna2[i:i+3]
-        if codon1 != codon2 and i < len(dna1):
+        if codon1 != codon2 and i <= len(dna1):
             if get_protein(codon1) == '' or get_protein(codon2) == '':
                 nonsyn += 1
             elif get_protein(codon1) != get_protein(codon2):
@@ -138,9 +138,9 @@ def main(f1, f2, m_score, i_score, g_score):
             strand1, strand2 = global_alignment(next(gen1), next(gen2), m_score, i_score, g_score)
         except StopIteration:
             return
-        print strand1
-        print "- - -"
-        print strand2
+        # print strand1
+        # print "- - -"
+        # print strand2
         strand1 = strand1.upper().replace("T", "U")
         strand2 = strand2.upper().replace("T", "U")
         syn, nonsyn = check_mutations(strand1, strand2)
