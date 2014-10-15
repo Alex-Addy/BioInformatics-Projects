@@ -111,10 +111,12 @@ def check_mutations(dna1, dna2):
         codon1 = dna1[i:i+3]
         codon2 = dna2[i:i+3]
         if codon1 != codon2 and i < len(dna1):
-            if get_protein(codon1) != get_protein(codon2):
-                syn += 1
-            else:
+            if get_protein(codon1) == '' or get_protein(codon2) == '':
                 nonsyn += 1
+            elif get_protein(codon1) != get_protein(codon2):
+                nonsyn += 1
+            else:
+                syn += 1
     return syn, nonsyn
 
 def fastaFromFile(open_file):
@@ -137,10 +139,14 @@ def main(f1, f2, m_score, i_score, g_score):
         except StopIteration:
             return
         print strand1
+        print "- - -"
         print strand2
+        strand1 = strand1.upper().replace("T", "U")
+        strand2 = strand2.upper().replace("T", "U")
         syn, nonsyn = check_mutations(strand1, strand2)
         print "Synonymous mutations: " + str(syn)
         print "Non-synonymous mutations: " + str(nonsyn)
+        print "-------------------------------" * 2
 
 if __name__ == '__main__':
     import argparse

@@ -24,5 +24,6 @@ RNA_Codon_Table = {
 }
 
 def get_protein(code):
-    code = code.upper()
+    #code = code.upper()
+    #code.replace("T", "U")
     RNA_Codon_Table.get(code, '')
