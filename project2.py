@@ -118,6 +118,10 @@ def check_mutations(dna1, dna2):
     return syn, nonsyn
 
 def fastaFromFile(open_file):
+    """
+
+    :rtype : basestring
+    """
     assert type(open_file) is file, "Need an open file handle to work"
     cur_gene = ''
     for line in open_file:
@@ -127,20 +131,40 @@ def fastaFromFile(open_file):
             cur_gene = ''
         else:
             cur_gene += line.strip()
+    yield cur_gene
 
 def main(f1, f2, m_score, i_score, g_score):
-    while True:
-        gen1 = fastaFromFile(f1)
-        gen2 = fastaFromFile(f2)
+    gen1 = fastaFromFile(f1)
+    gen2 = fastaFromFile(f2)
+
+    for gene_num in range(1, 100):
         try:
-            strand1, strand2 = global_alignment(next(gen1), next(gen2), m_score, i_score, g_score)
+            strand1, strand2 = next(gen1), next(gen2)
+
+            # sudan strand is missing the eighth gene, so we advance the other side past it to the next gene
+            if "Sudan1976.txt" in f1.name and gene_num == 8:
+                print "F1 is sudan file, skipping gene 8"
+                strand2 == next(gen2)
+                gene_num += 1
+            if "Sudan1976.txt" in f2.name and gene_num == 8:
+                print "F2 is sudan file, skipping gene 8"
+                strand1 == next(gen1)
+                gene_num += 1
+
+            print "Gene #%d with files '%s' and '%s'" % (gene_num, f1.name, f2.name)
+            print strand1
+            print strand2
+            strand1, strand2 = global_alignment(strand1, strand2, m_score, i_score, g_score)
+
         except StopIteration:
             return
         print strand1
         print strand2
         syn, nonsyn = check_mutations(strand1, strand2)
-        print "Synonymous mutations: " + str(syn)
-        print "Non-synonymous mutations: " + str(nonsyn)
+        print "Synonymous mutations: %d" % (syn)
+        print "Non-synonymous mutations: %d" % (nonsyn)
+        print "="*40
+        print ''
 
 if __name__ == '__main__':
     import argparse
