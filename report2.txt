@@ -10,6 +10,17 @@ Need 3-4 biology articles discussing ebola.
 3) Pairwise align 2014 sequences with (1) "The Ebola virus - Mayinga, Zaire, 1976, complete genome" and (2) "The Sudan ebolavirus strain Boniface, 1976, complete genome";
 4) Count the number of mutations and characterize each mutation. So you should have two tables like this:
 
+1) 
+	i) 18959 bp
+	ii) 
+	iii) CDS means complete DNA sequence. 7 proteins. NP, VP35, VP40, GP, VP30, VP24, L (from wikipedia.org)
+	iv) polyadenylation is the process required for teh synthesis of messenger RNA (mRNA) in which an endonucleolityc RNA cleavage is coupled with synthesis of polyadenosine monophosphate (adenine base) on the newly formed 3' end.   (from imgt.org)  It is quite hard to just identify them, however programs have been written, such as POLYAR to predict where they are to a fairly high degree of success. (from biomedcentral.com)
+
+References:
+http://www.imgt.org/IMGTeducation/Aide-memoire/_UK/poly/
+http://www.biomedcentral.com/1471-2164/11/646
+http://en.wikipedia.org/wiki/Ebola_virus
+
 Zaire Ebolavirus
 -------------------------------------------------------------------------
 |    Gene    | Insertion | Deletion | Syn Mutations | Non-Syn Mutations |
