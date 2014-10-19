@@ -122,44 +122,45 @@ def check_mutations(dna1, dna2):
 def fastaFromFile(open_file):
     """
 
-    :rtype : basestring
+    :rtype : list
     """
     assert type(open_file) is file, "Need an open file handle to work"
+    genes = []
     cur_gene = ''
     for line in open_file:
         if line[0] == '>':
             if cur_gene == '': continue
-            yield cur_gene
+            genes.append(cur_gene.upper())
             cur_gene = ''
         else:
             cur_gene += line.strip()
-    yield cur_gene
+    genes.append(cur_gene.upper())
+    return genes
 
 def main(f1, f2, m_score, i_score, g_score):
-    gen1 = fastaFromFile(f1)
-    gen2 = fastaFromFile(f2)
+    gene_list_1 = fastaFromFile(f1)
+    gene_list_2 = fastaFromFile(f2)
 
-    for gene_num in range(1, 100):
-        try:
-            strand1, strand2 = next(gen1), next(gen2)
+    # sudan strand is missing the eighth gene, so we advance the other side past it to the next gene
+    if "Sudan1976.txt" in f1.name:
+        gene_list_1.insert(-1, '')
+    elif "Sudan1976.txt" in f2.name:
+        gene_list_2.insert(-1, '')
 
-            # sudan strand is missing the eighth gene, so we advance the other side past it to the next gene
-            if "Sudan1976.txt" in f1.name and gene_num == 8:
-                print "F1 is sudan file, skipping gene 8"
-                strand2 == next(gen2)
-                gene_num += 1
-            if "Sudan1976.txt" in f2.name and gene_num == 8:
-                print "F2 is sudan file, skipping gene 8"
-                strand1 == next(gen1)
-                gene_num += 1
+    for gene_num in range(0, len(gene_list_1)):
+        if gene_list_1[gene_num] == '' or gene_list_2[gene_num] == '':
+            print "Empty gene %d with genes:" % (gene_num)
+            print "\t%s" % (gene_list_1[gene_num])
+            print "\t%s" % (gene_list_2[gene_num])
+            print ""
+            continue
 
-            print "Gene #%d with files '%s' and '%s'" % (gene_num, f1.name, f2.name)
-            print strand1
-            print strand2
-            strand1, strand2 = global_alignment(strand1, strand2, m_score, i_score, g_score)
+        strand1, strand2 = gene_list_1[gene_num], gene_list_2[gene_num]
+        print "Gene #%d with files '%s' and '%s'" % (gene_num, f1.name, f2.name)
+        strand1, strand2 = global_alignment(strand1, strand2, m_score, i_score, g_score)
+        print strand1
+        print strand2
 
-        except StopIteration:
-            return
         # print strand1
         # print "- - -"
         # print strand2
