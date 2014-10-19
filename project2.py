@@ -180,10 +180,34 @@ if __name__ == '__main__':
     parser.add_argument('i_score', type=int, help="Scoring for mismatch")
     parser.add_argument('g_score', type=int, help="Scoring for gap")
 
-    parser.add_argument('--gene-file-1', type=argparse.FileType('r'), help="File containing the NCBI coding sequences")
-    parser.add_argument('--gene-file-2', type=argparse.FileType('r'), help="File containing the NCBI coding sequences")
-
     args = vars(parser.parse_args())
 
-    main(args["gene-file-1"], args["gene-file-2"], args["m_score"], args["i_score"], args["g_score"])
+    km_files = \
+    ["KM233118.txt", "KM233040.txt", "KM233041.txt", "KM233042.txt", "KM233043.txt", "KM233044.txt", "KM233045.txt", "KM233046.txt",
+        "KM233047.txt", "KM233048.txt", "KM233049.txt", "KM233050.txt", "KM233051.txt", "KM233052.txt", "KM233053.txt", "KM233054.txt",
+        "KM233055.txt", "KM233056.txt", "KM233057.txt", "KM233058.txt", "KM233059.txt", "KM233060.txt", "KM233061.txt", "KM233062.txt",
+        "KM233063.txt", "KM233064.txt", "KM233065.txt", "KM233066.txt", "KM233067.txt", "KM233068.txt", "KM233069.txt", "KM233070.txt",
+        "KM233071.txt", "KM233072.txt", "KM233073.txt", "KM233074.txt", "KM233075.txt", "KM233076.txt", "KM233077.txt", "KM233078.txt",
+        "KM233079.txt", "KM233080.txt", "KM233081.txt", "KM233082.txt", "KM233083.txt", "KM233084.txt", "KM233085.txt", "KM233086.txt",
+        "KM233087.txt", "KM233088.txt", "KM233089.txt", "KM233090.txt", "KM233091.txt", "KM233092.txt", "KM233093.txt", "KM233094.txt",
+        "KM233095.txt", "KM233096.txt", "KM233097.txt", "KM233098.txt", "KM233099.txt", "KM233100.txt", "KM233101.txt", "KM233102.txt",
+        "KM233103.txt", "KM233104.txt", "KM233105.txt", "KM233106.txt", "KM233107.txt", "KM233108.txt", "KM233109.txt", "KM233110.txt",
+        "KM233111.txt", "KM233112.txt", "KM233113.txt", "KM233114.txt", "KM233115.txt", "KM233116.txt", "KM233117.txt"]
 
+    with open("Sudan1976.txt") as sudan_f:
+        for f_name in km_files:
+            with open(f_name) as km_file:
+                print '*' * 50
+                print '* Sudan against %s' % (f_name), '*' * ((50-17)-len(f_name))
+                print '*' * 50
+                main(sudan_f, km_file, args["m_score"], args["i_score"], args["g_score"])
+            sudan_f.seek(0)
+
+    with open("Zaire1976.txt") as zaire_f:
+        for f_name in km_files:
+            with open(f_name) as km_file:
+                print '*' * 50
+                print '* Zaire against %s' % (f_name), '*' * ((50-17)-len(f_name))
+                print '*' * 50
+                main(zaire_f, km_file, args["m_score"], args["i_score"], args["g_score"])
+            zaire_f.seek(0)
