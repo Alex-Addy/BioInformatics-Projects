@@ -59,7 +59,7 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
     #table debug statement
     #print_table(table)
     #print_table(direction)
-    print "Final score: " + str(table[y][x])
+    #print "Final score: " + str(table[y][x])
     
     #trace back through table
     x = lengthTop - 1
@@ -92,10 +92,12 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
             deletes += 1
             #print "Deleted"
 
-    print "Insertions: " + str(inserts)
-    print "Deletions: "  + str(deletes)
+    #print "Insertions: " + str(inserts)
+    #print "Deletions: "  + str(deletes)
 
-    return ''.join(dnaFinal1[::-1]), ''.join(dnaFinal2[::-1])
+    #print "%d,%d" % (inserts, deletes)
+
+    return ''.join(dnaFinal1[::-1]), ''.join(dnaFinal2[::-1]), inserts, deletes, table[y][x]
 
 def print_table(table):
     for x in range(0, len(table)):
@@ -149,17 +151,17 @@ def main(f1, f2, m_score, i_score, g_score):
 
     for gene_num in range(0, len(gene_list_1)):
         if gene_list_1[gene_num] == '' or gene_list_2[gene_num] == '':
-            print "Empty gene %d with genes:" % (gene_num)
-            print "\t%s" % (gene_list_1[gene_num])
-            print "\t%s" % (gene_list_2[gene_num])
-            print ""
+            #print "Empty gene %d with genes:" % (gene_num)
+            #print "\t%s" % (gene_list_1[gene_num])
+            #print "\t%s" % (gene_list_2[gene_num])
+            #print ""
             continue
 
         strand1, strand2 = gene_list_1[gene_num], gene_list_2[gene_num]
-        print "Gene #%d with files '%s' and '%s'" % (gene_num, f1.name, f2.name)
-        strand1, strand2 = global_alignment(strand1, strand2, m_score, i_score, g_score)
-        print strand1
-        print strand2
+        #print "Gene #%d with files '%s' and '%s'" % (gene_num, f1.name, f2.name)
+        strand1, strand2, insertions, deletions, final_score = global_alignment(strand1, strand2, m_score, i_score, g_score)
+        #print strand1
+        #print strand2
 
         # print strand1
         # print "- - -"
@@ -167,10 +169,11 @@ def main(f1, f2, m_score, i_score, g_score):
         strand1 = strand1.upper().replace("T", "U")
         strand2 = strand2.upper().replace("T", "U")
         syn, nonsyn = check_mutations(strand1, strand2)
-        print "Synonymous mutations: %d" % (syn)
-        print "Non-synonymous mutations: %d" % (nonsyn)
-        print "="*40
-        print ''
+        print "%s,%d,%d,%d,%d,%d,%d" % (f2.name, gene_num+1, insertions, deletions, syn, nonsyn, final_score)
+        #print "Synonymous mutations: %d" % (syn)
+        #print "Non-synonymous mutations: %d" % (nonsyn)
+        #print "="*40
+        #print ''
 
 if __name__ == '__main__':
     import argparse
@@ -195,19 +198,16 @@ if __name__ == '__main__':
         "KM233111.txt", "KM233112.txt", "KM233113.txt", "KM233114.txt", "KM233115.txt", "KM233116.txt", "KM233117.txt"]
 
     with open("Sudan1976.txt") as sudan_f:
+        print "Sudan Ebolavirus,Gene #,Insertion,Deletion,Synonymous Mutations,Nonsynonymous Mutations,Final Score"
         for f_name in km_files:
             with open(f_name) as km_file:
-                print '*' * 50
-                print '* Sudan against %s' % (f_name), '*' * ((50-17)-len(f_name))
-                print '*' * 50
                 main(sudan_f, km_file, args["m_score"], args["i_score"], args["g_score"])
             sudan_f.seek(0)
 
+    print ",,,,,,"
     with open("Zaire1976.txt") as zaire_f:
+        print "Zaire Ebolavirus,Gene #,Insertion,Deletion,Synonymous Mutations,Nonsynonymous Mutations,Final Score"
         for f_name in km_files:
             with open(f_name) as km_file:
-                print '*' * 50
-                print '* Zaire against %s' % (f_name), '*' * ((50-17)-len(f_name))
-                print '*' * 50
                 main(zaire_f, km_file, args["m_score"], args["i_score"], args["g_score"])
             zaire_f.seek(0)
