@@ -122,9 +122,9 @@ def check_mutations(dna1, dna2):
     return syn, nonsyn
 
 def fastaFromFile(open_file):
-    """
-
-    :rtype : list
+    """Takes an open file handle, and returns a list of genes.
+    
+        Assumes that genes are seperated by a line starting with a '>'.
     """
     assert type(open_file) is file, "Need an open file handle to work"
     genes = []
