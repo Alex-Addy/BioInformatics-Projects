@@ -12,8 +12,8 @@ Introduction:
 
 Materials and Methods:
 	
-	global_alignment():
-		Given the two strands to align as well as a match, mismatch, and gap score, the method will globally align the two strands and return the number of insertions and deletions.
+	global_alignment(strand1, strand2, match_score, mismatch_score, gap_score):
+		Given the two strands to align as well as a match, mismatch, and gap score, the method will globally align the two strands and return the aligned strands (using _ to represent gaps), the # of insertions, the # of deletions, the final score for the alignment.
 
 	print_table():
 		Simple method to print the table that was the input.
