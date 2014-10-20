@@ -5,6 +5,11 @@ from ProteinLookup import get_protein
 
 
 def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
+    """ Finds the best global alignment for the two given strings.
+    
+        Returns a 5-tuple of items:
+        aligned dna1, aligned dna2, insertions, deletions, final score
+    """
     dna1 = dna1.upper()
     dna2 = dna2.upper()
 
@@ -24,7 +29,6 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
     # 1 = left
     # 2 = diagonal
     # 3 = up
-    # TODO: replace -2 with argument g
     for x in range(0,lengthTop):
         table[0][x]     = x * gap_score
         direction[0][x] = 1
