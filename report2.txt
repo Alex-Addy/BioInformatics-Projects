@@ -12,8 +12,8 @@ Need 3-4 biology articles discussing ebola.
 
 1) 
 	i) 18959 bp
-	ii) 
-	iii) CDS means complete DNA sequence. 7 proteins. NP, VP35, VP40, GP, VP30, VP24, L (from wikipedia.org)
+	ii) 7 genes. NP, VP35, VP40, GP, VP30, VP24, L (from wikipedia.org)
+	iii) CDS means complete DNA sequence. The genome codes for seven structural proteins and one non-structural protein. (from wikipedia.org)
 	iv) polyadenylation is the process required for teh synthesis of messenger RNA (mRNA) in which an endonucleolityc RNA cleavage is coupled with synthesis of polyadenosine monophosphate (adenine base) on the newly formed 3' end.   (from imgt.org)  It is quite hard to just identify them, however programs have been written, such as POLYAR to predict where they are to a fairly high degree of success. (from biomedcentral.com)
 
 References:
