@@ -5,8 +5,8 @@ from ProteinLookup import get_protein
 
 
 def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
-    dna1 = dna1.lower()
-    dna2 = dna2.lower()
+    dna1 = dna1.upper()
+    dna2 = dna2.upper()
 
     dna1 = ' ' + dna1
     dna2 = ' ' + dna2
