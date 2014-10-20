@@ -97,7 +97,7 @@ def global_alignment(dna1, dna2, match_score, mismatch_score, gap_score):
 
     #print "%d,%d" % (inserts, deletes)
 
-    return ''.join(dnaFinal1[::-1]), ''.join(dnaFinal2[::-1]), inserts, deletes, table[y][x]
+    return ''.join(dnaFinal1[::-1]), ''.join(dnaFinal2[::-1]), inserts, deletes, table[lengthBot-1][lengthTop-1]
 
 def print_table(table):
     for x in range(0, len(table)):
