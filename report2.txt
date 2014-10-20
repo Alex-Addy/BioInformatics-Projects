@@ -12,19 +12,19 @@ Introduction:
 
 Materials and Methods:
 	
-	global_alignment():
-		Given the two strands to align as well as a match, mismatch, and gap score, the method will globally align the two strands and return the number of insertions and deletions.
+	global_alignment(strand1, strand2, match_score, mismatch_score, gap_score):
+		Given the two strands to align as well as a match, mismatch, and gap score, the method will globally align the two strands and return the aligned strands (using _ to represent gaps), the # of insertions, the # of deletions, the final score for the alignment.
 
-	print_table():
-		Simple method to print the table that was the input.
+	print_table(table):
+		Simple method to print the 2d array that was the input. Used mainly when debugging global_alignment.
 
-	check_mutations():
+	check_mutations(strand1, strand2):
 		Given two strands, the function will return the number of synonymous and nonsynonymous mutations.
 
-	fastaFromFile():
-		Simple method to get the dna data from a Fasta file.
+	fastaFromFile(filehandle):
+		Simple method to get the dna data from a Fasta file. Returns a list with each gene being a string in it.
 	
-	main():
+	main(file1, file2, match_score, mismatch_score, gap_score):
 		Given the two strands to align as well as a match, mismatch, and gap score, the method will call the global_alignment function, check for mutations, and print out the results for every gene in the strands.
 
 Implementation:
