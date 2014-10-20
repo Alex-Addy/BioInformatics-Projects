@@ -1,5 +1,16 @@
 Need 3-4 biology articles discussing ebola.
 
+Abstract:
+
+Introduction:
+
+Materials and Methods:
+
+Implementation:
+
+Results and discussion:
+
+Conclusion:
 
 1) Understand Genban entries at NCBI and answer the following questions for "AF086833.2"
 	i)		What's the size/length of the Ebola virus genome? What is it made of? (RNA/DNA)?
@@ -11,30 +22,13 @@ Need 3-4 biology articles discussing ebola.
 4) Count the number of mutations and characterize each mutation. So you should have two tables like this:
 
 1) 
-	i) 18959 bp
+	i) 18959 bp.  It is a single-strand of RNA.
 	ii) 7 genes. NP, VP35, VP40, GP, VP30, VP24, L (from wikipedia.org)
 	iii) CDS means complete DNA sequence. The genome codes for seven structural proteins and one non-structural protein. (from wikipedia.org)
-	iv) polyadenylation is the process required for teh synthesis of messenger RNA (mRNA) in which an endonucleolityc RNA cleavage is coupled with synthesis of polyadenosine monophosphate (adenine base) on the newly formed 3' end.   (from imgt.org)  It is quite hard to just identify them, however programs have been written, such as POLYAR to predict where they are to a fairly high degree of success. (from biomedcentral.com)
+	iv) polyadenylation is the process required for the synthesis of messenger RNA (mRNA) in which an endonucleolityc RNA cleavage is coupled with synthesis of polyadenosine monophosphate (adenine base) on the newly formed 3' end.   (from imgt.org)  It is quite hard to just identify them, however programs have been written, such as POLYAR to predict where they are to a fairly high degree of success. (from biomedcentral.com)
 
 References:
 http://www.imgt.org/IMGTeducation/Aide-memoire/_UK/poly/
 http://www.biomedcentral.com/1471-2164/11/646
 http://en.wikipedia.org/wiki/Ebola_virus
 
-Zaire Ebolavirus
--------------------------------------------------------------------------
-|    Gene    | Insertion | Deletion | Syn Mutations | Non-Syn Mutations |
--------------------------------------------------------------------------
-| KM233118.1 |
--------------------------------------------------------------------------
-| KM233117.1 |
--------------------------------------------------------------------------
-
-Sudan Ebolavirus
--------------------------------------------------------------------------
-|    Gene    | Insertion | Deletion | Syn Mutations | Non-Syn Mutations |
--------------------------------------------------------------------------
-| KM233118.1 |
--------------------------------------------------------------------------
-| KM233117.1 |
--------------------------------------------------------------------------
