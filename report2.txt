@@ -1,27 +1,69 @@
-Need 3-4 biology articles discussing ebola.
+Alex Addy
+Cory Sutyak
+Nick Thompson
 
 Abstract:
+	
+	The idea for the assignment is to look at two different strands of the Ebola virus.  Using different statistical techniques, we have collected data regarding both the Zaire and the Sudan form of Ebola. The report will present some of these statistics and talk about the meaning of them.
 
 Introduction:
 
+	With this assignment we had 3 different goals to complete.  We had to implement a sequence alignment algorithm.  We have to understand the different types of mutations. And we had to practice conducting comparative scientific research.  	
+
 Materials and Methods:
+	
+	global_alignment():
+		Given the two strands to align as well as a match, mismatch, and gap score, the method will globally align the two strands and return the number of insertions and deletions.
+
+	print_table():
+		Simple method to print the table that was the input.
+
+	check_mutations():
+		Given two strands, the function will return the number of synonymous and nonsynonymous mutations.
+
+	fastaFromFile():
+		Simple method to get the dna data from a Fasta file.
+	
+	main():
+		Given the two strands to align as well as a match, mismatch, and gap score, the method will call the global_alignment function, check for mutations, and print out the results for every gene in the strands.
 
 Implementation:
+	
+	The program itself globally aligns  genes in a genome with their mutations through global alignment.  From there it will calculate the number of synonymous and nonsynonymous mutations between the two.  It will then be iterated throughout the whole genome.
 
 Results and discussion:
+	The more in depth display of our data can be found on our spreadsheet.
+
+	Zaire:		Ins	Del	SM	NM
+		Min	0	0	8	0
+		Max	0	0	144	28
+		Avg	0	0	33.26	8.46
+		S.D	0	0	40.5	9.23
+		25P	0	0	12	2
+		Med	0	0	15	4
+		75P	0	0	35	15	
+
+	Sudan:		Ins	Del	SM	NM
+		Min	50	14	10	196
+		Max	681	97	387	1216
+		Avg	366.08	43.69	87.13	412.06
+		S.D	182.59	25	117.17	316.59
+		25P	207.75	24	28.75	239.25
+		Med	365.5	45.5	33	265
+		75P	523.25	52.25	81	437.25
+
+	Looking at the data for the Sudan, there is a direct correlation between the the gene and the Deletions, S. Mutations, and N. Mutations, regardless of which mutation it is.  It is always a fixed number for a given gene.  It is interesting to note that the number of insertions increased at a constant rate of 1.
 
 Conclusion:
+	To re-iterate, the goals of the project were to implement the global alignment algorithm, understand the different types of mutations, and practice conducting comparative scientific research.  Along with that, there were questions that needed to be answers of which, they are listed below.  Through our programming we implemented the algorithm and with the data analysis we have learned the differences in the mutations and were able to practice comparing as a result.
 
 1) Understand Genban entries at NCBI and answer the following questions for "AF086833.2"
 	i)		What's the size/length of the Ebola virus genome? What is it made of? (RNA/DNA)?
 	ii)		How many genes does Ebola virus genome contain; what are their names?
 	iii)	What does CDS mean? How many proteins does Ebola virus genome code? What are they?
 	iv)		What is polyA_signal? What's function? Can you write a program to identify them?
-2) Implement pairwise alignment in python (you group should figure out which alignment algorithm you need to use;
-3) Pairwise align 2014 sequences with (1) "The Ebola virus - Mayinga, Zaire, 1976, complete genome" and (2) "The Sudan ebolavirus strain Boniface, 1976, complete genome";
-4) Count the number of mutations and characterize each mutation. So you should have two tables like this:
 
-1) 
+
 	i) 18959 bp.  It is a single-strand of RNA.
 	ii) 7 genes. NP, VP35, VP40, GP, VP30, VP24, L (from wikipedia.org)
 	iii) CDS means complete DNA sequence. The genome codes for seven structural proteins and one non-structural protein. (from wikipedia.org)
