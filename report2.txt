@@ -35,24 +35,24 @@ Results and discussion:
 	The more in depth display of our data can be found on our spreadsheet.
 
 	Zaire:		Ins	Del	SM	NM	Score
-		Min	0	0	8	0	-137
-		Max	0	0	144	28	2416
-		Avg	0	0	33.26	8.46	547.81
-		S.D	0	0	40.5	9.23	760.36
-		25P	0	0	12	2	173.25
-		Med	0	0	15	4	343
-		75P	0	0	35	15	564.25
+		Min	0	0	8	0	720
+		Max	0	0	144	28	6301
+		Avg	0	0	33.26	8.46	1748.98
+		S.D	0	0	40.5	9.23	1674.52
+		25P	0	0	12	2	864
+		Med	0	0	15	4	999
+		75P	0	0	35	15	1913
 
 	Sudan:		Ins	Del	SM	NM	Score
-		Min	15	14	10	196	720
-		Max	138	97	387	1216	6301
-		Avg	63.13	43.63	86.99	411.41	1748.98
-		S.D	39.1	25	117.17	316.59	1674.52
-		25P	40.25	24	28.75	239.25	864
-		Med	51	45.5	33	265	999
-		75P	85.75	52.25	81	437.25	1913
+		Min	15	14	10	196	-137
+		Max	138	97	387	1216	2416
+		Avg	63.13	43.63	86.99	411.41	547.81
+		S.D	39.1	25	117.17	316.59	760.36
+		25P	40.25	24	28.75	239.25	173.25
+		Med	51	45.5	33	265	343
+		75P	85.75	52.25	81	437.25	564.25
 
-	Looking at the data for the Sudan, there is a direct correlation between the the gene and the Deletions, S. Mutations, and N. Mutations, regardless of which mutation it is.  It is always a fixed number for a given gene.  It is interesting to note that the number of insertions increased at a constant rate of 1.
+	Looking at the data for the Sudan, there is a direct correlation between the the gene and the Insertions, Deletions, S. Mutations, and N. Mutations, and final score regardless of which mutation it is.  It is always a fixed number for a given gene.  At first it seemed rather odd that for the Zaire strand to not have any amount of insertions or deletions, but after looking at the final score data, it makes sense seeing as all of the scores are really high.  This is unlike the Sudan strain where there is many insertions and deletions and the scores can very.  This would suggest that the Zaire strands didn't create any gaps in alignment unlike the Sudan strands.
 
 Conclusion:
 	To re-iterate, the goals of the project were to implement the global alignment algorithm, understand the different types of mutations, and practice conducting comparative scientific research.  Along with that, there were questions that needed to be answers of which, they are listed below.  Through our programming we implemented the algorithm and with the data analysis we have learned the differences in the mutations and were able to practice comparing as a result.
