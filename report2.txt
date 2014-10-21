@@ -1,6 +1,7 @@
-Alex Addy
-Cory Sutyak
-Nick Thompson
+Responsibilities:
+Alex Addy - Dealing with I/O and debugging
+Cory Sutyak - Report writing and debugging
+Nick Thompson - Core alignment algorithm and initial implementation of functions
 
 Abstract:
 	
@@ -12,6 +13,11 @@ Introduction:
 
 Materials and Methods:
 	
+	All sample data was gathered from the NCBI pages:
+		http://www.ncbi.nlm.nih.gov/bioproject/PRJNA257197
+		http://www.ncbi.nlm.nih.gov/nuccore/AF086833.2
+		http://www.ncbi.nlm.nih.gov/nuccore/237900821
+
 	global_alignment(strand1, strand2, match_score, mismatch_score, gap_score):
 		Given the two strands to align as well as a match, mismatch, and gap score, the method will globally align the two strands and return the aligned strands (using _ to represent gaps), the # of insertions, the # of deletions, the final score for the alignment.
 
@@ -19,17 +25,19 @@ Materials and Methods:
 		Simple method to print the 2d array that was the input. Used mainly when debugging global_alignment.
 
 	check_mutations(strand1, strand2):
-		Given two strands, the function will return the number of synonymous and nonsynonymous mutations.
+		Given two strands, the function will return the number of synonymous and non-synonymous mutations.
 
 	fastaFromFile(filehandle):
-		Simple method to get the dna data from a Fasta file. Returns a list with each gene being a string in it.
+		Simple method to get the dna data from a file in the fasta format. Returns a list with each gene being a string in it.
 	
 	main(file1, file2, match_score, mismatch_score, gap_score):
 		Given the two strands to align as well as a match, mismatch, and gap score, the method will call the global_alignment function, check for mutations, and print out the results for every gene in the strands.
 
 Implementation:
 	
-	The program itself globally aligns  genes in a genome with their mutations through global alignment.  From there it will calculate the number of synonymous and nonsynonymous mutations between the two.  It will then be iterated throughout the whole genome.
+	The program itself globally aligns  genes in a genome with their mutations through global alignment.  From there it will calculate the number of synonymous and non-synonymous mutations between the two.  It will iterate through the whole genome.
+	The programs current implementation takes three command line arguments: match score, mismatch score, gap score. It will then look for each the files that it is supposed to operate on in the current directory. First aligning the Sudan genome against all KM files, then doing the same for Zaire.
+	A full run will take quite some time, ~2.5 hours on my computer. Having looked at task manager and watching the output, this seems to be a problem of inefficiently using memory. As the cpu usage would only rarely spike above 20%. Constantly allocating and garbage collecting objects is not very efficient.
 
 Results and discussion:
 	The more in depth display of our data can be found on our spreadsheet.
@@ -52,16 +60,16 @@ Results and discussion:
 		Med	51	45.5	33	265	343
 		75P	85.75	52.25	81	437.25	564.25
 
-	Looking at the data for the Sudan, there is a direct correlation between the the gene and the Insertions, Deletions, S. Mutations, and N. Mutations, and final score regardless of which mutation it is.  It is always a fixed number for a given gene.  At first it seemed rather odd that for the Zaire strand to not have any amount of insertions or deletions, but after looking at the final score data, it makes sense seeing as all of the scores are really high.  This is unlike the Sudan strain where there is many insertions and deletions and the scores can very.  This would suggest that the Zaire strands didn't create any gaps in alignment unlike the Sudan strands.
+	Looking at the data for the Sudan, there is a direct correlation between the the gene and the Insertions, Deletions, S. Mutations, and N. Mutations, and final score regardless of which mutation it is.  It is always a fixed number for a given gene.  At first it seemed rather odd that for the Zaire strand to not have any amount of insertions or deletions, but after looking at the final score data, it makes sense seeing as all of the scores are really high.  This is unlike the Sudan strain where there is many insertions and deletions and the scores can very.  This would suggest that the Zaire strands are much more related to the KM strands than the Sudan strands.
 
 Conclusion:
 	To re-iterate, the goals of the project were to implement the global alignment algorithm, understand the different types of mutations, and practice conducting comparative scientific research.  Along with that, there were questions that needed to be answers of which, they are listed below.  Through our programming we implemented the algorithm and with the data analysis we have learned the differences in the mutations and were able to practice comparing as a result.
 
 1) Understand Genban entries at NCBI and answer the following questions for "AF086833.2"
-	i)		What's the size/length of the Ebola virus genome? What is it made of? (RNA/DNA)?
-	ii)		How many genes does Ebola virus genome contain; what are their names?
+	i)	What's the size/length of the Ebola virus genome? What is it made of? (RNA/DNA)?
+	ii)	How many genes does Ebola virus genome contain; what are their names?
 	iii)	What does CDS mean? How many proteins does Ebola virus genome code? What are they?
-	iv)		What is polyA_signal? What's function? Can you write a program to identify them?
+	iv)	What is polyA_signal? What's function? Can you write a program to identify them?
 
 
 	i) 18959 bp.  It is a single-strand of RNA.
