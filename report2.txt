@@ -34,23 +34,23 @@ Implementation:
 Results and discussion:
 	The more in depth display of our data can be found on our spreadsheet.
 
-	Zaire:		Ins	Del	SM	NM
-		Min	0	0	8	0
-		Max	0	0	144	28
-		Avg	0	0	33.26	8.46
-		S.D	0	0	40.5	9.23
-		25P	0	0	12	2
-		Med	0	0	15	4
-		75P	0	0	35	15	
+	Zaire:		Ins	Del	SM	NM	Score
+		Min	0	0	8	0	-137
+		Max	0	0	144	28	2416
+		Avg	0	0	33.26	8.46	547.81
+		S.D	0	0	40.5	9.23	760.36
+		25P	0	0	12	2	173.25
+		Med	0	0	15	4	343
+		75P	0	0	35	15	564.25
 
-	Sudan:		Ins	Del	SM	NM
-		Min	50	14	10	196
-		Max	681	97	387	1216
-		Avg	366.08	43.69	87.13	412.06
-		S.D	182.59	25	117.17	316.59
-		25P	207.75	24	28.75	239.25
-		Med	365.5	45.5	33	265
-		75P	523.25	52.25	81	437.25
+	Sudan:		Ins	Del	SM	NM	Score
+		Min	15	14	10	196	720
+		Max	138	97	387	1216	6301
+		Avg	63.13	43.63	86.99	411.41	1748.98
+		S.D	39.1	25	117.17	316.59	1674.52
+		25P	40.25	24	28.75	239.25	864
+		Med	51	45.5	33	265	999
+		75P	85.75	52.25	81	437.25	1913
 
 	Looking at the data for the Sudan, there is a direct correlation between the the gene and the Deletions, S. Mutations, and N. Mutations, regardless of which mutation it is.  It is always a fixed number for a given gene.  It is interesting to note that the number of insertions increased at a constant rate of 1.
 
