@@ -42,13 +42,14 @@ Your task is to navigate the flu database at NCBI (http://www.ncbi.nlm.nih.gov/g
   4. What distance did you use in part 3? Change your distance measure; how much did your tree change? What's your explanation about the difference? What can you tell your friends about this years H1N1 virus based on your trees?
     F84
     The tree had only minor changes with only a few sequences moving. The movement was mainly in having two neighbor leaf nodes swap places, a minor negligible change
-    It is very similar acrossed the board and you should be fine after getting the flu shot.
+    It is very similar across the board and you should be fine after getting the flu shot.
 
-  5. Repeat part 3 and 4 for H3N2 virus using the UPGMA algorithm.  This tree is deeper showing many subtrees.
+  5. Repeat part 3 and 4 for H3N2 virus using the UPGMA algorithm.  This tree is deeper showing many subtrees.  Once again changing the distance only results in minor changes.
 
-  6. Repeat part 3 and 4 for combined sequences for H1N1 and H3N2 using neighbor-joining algorithm.
+  6. Repeat part 3 and 4 for combined sequences for H1N1 and H3N2 using neighbor-joining algorithm.  The tree is very one sided with the H1N1 and H3N2 strains being grouped together
+	in subtrees.  The change in difference showed little to no change in the resulting tree.
 
-  7. What additional observations have you made from the tree obtained in part 6?
+  7. What additional observations have you made from the tree obtained in part 6?  
 
 What to submit – A Report which includes:
 
