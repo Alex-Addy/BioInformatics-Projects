@@ -10,15 +10,15 @@ Your task is to navigate the flu database at NCBI (http://www.ncbi.nlm.nih.gov/g
 
   1. Just to get you started, first answer the following questions about the database:
 
-      a. How many different types Influenza viruses have?
+      a. How many different types Influenza viruses have? 3 (A,B,C)
 
-      b. List five host species the database considers
+      b. List five host species the database considers (Avian, Bat, Blow Fly, Bovine, Camel, Cat, Ferret)
 
       c. How many nucleotide segments an influenza A virus contains and how many an influenza B virus contains?
 
-      d. What do the subtypes H and N stand for? What do the numbers in H1N1 and H3N2 stand for?
+      d. What do the subtypes H and N stand for? What do the numbers in H1N1 and H3N2 stand for? H : hemagglutinin, N : neuraminidase. The numbers are the speific subtype of that protein, with there being 18 different H subtypes and 11 different N subtypes. \[CDC: www.cdc.gov/flu/about/viruses/types.htm\]
 
-      e. What makes influenza B different from influenza A?
+      e. What makes influenza B different from influenza A? The antigenic type, with the possibilities being A, B, and C. However C only causes a mild respiratory illness and "are not thought to cause epidemics"\[CDC\]
 
       f. Why do we have to have flu shots every year?
 
