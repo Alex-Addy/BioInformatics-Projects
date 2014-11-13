@@ -14,11 +14,10 @@ Your task is to navigate the flu database at NCBI (http://www.ncbi.nlm.nih.gov/g
 
   2. How many full length unique nucleotide sequences of H1N1 and H3N2 isolated from people in USA from 1/1/2009 to 10/1/2014 has the database collected? How many of these collected this year?
 
-------------------------------------------------------
 |                       | H1N1 | H3N2      | B virus |
+| --------------------- | ---- | --------- | ------- |
 | 1/1/2009 to 10/1/2014 |      |           |         |
 | This year             |      |           |         |
-------------------------------------------------------
 
   3. Influenza Virus Sequence Tree. Considering unique full length protein sequences coding HA proteins in this year's H1N1 flu viruses infected people in USA, build your influenza virus sequence tree using the neighbor-joining algorithm. What does the tree look like?
 
@@ -30,12 +29,9 @@ Your task is to navigate the flu database at NCBI (http://www.ncbi.nlm.nih.gov/g
 
   7. What additional observations have you made from the tree obtained in part 6?
 
-/pagebreak
-
 What to submit – A Report which includes:
   Abstract - Give a brief presentation of the problem, summarize the methods, and outline your results and conclusions.
-  Introduction - Detailed problem description and background knowledge of the problem. Outline approaches you take to solve the problem and present a short literature survey on the 
-approaches you are taking. 
+  Introduction - Detailed problem description and background knowledge of the problem. Outline approaches you take to solve the problem and present a short literature survey on the approaches you are taking. 
   Materials and methods - Description of data acquisition, including the source. Description of the methods used, including complexity analysis of the algorithms.
   Implementation - Give a high level description of your implementation of your approach.
   Results and discussion - Describe and analyze the results of your computation. Use tables or graphs wherever you can.
