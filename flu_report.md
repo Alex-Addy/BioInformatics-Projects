@@ -44,7 +44,7 @@ Your task is to navigate the flu database at NCBI (http://www.ncbi.nlm.nih.gov/g
     The tree had only minor changes with only a few sequences moving. The movement was mainly in having two neighbor leaf nodes swap places, a minor negligible change
     It is very similar acrossed the board and you should be fine after getting the flu shot.
 
-  5. Repeat part 3 and 4 for H3N2 virus using the UPGMA algorithm.
+  5. Repeat part 3 and 4 for H3N2 virus using the UPGMA algorithm.  This tree is deeper showing many subtrees.
 
   6. Repeat part 3 and 4 for combined sequences for H1N1 and H3N2 using neighbor-joining algorithm.
 
