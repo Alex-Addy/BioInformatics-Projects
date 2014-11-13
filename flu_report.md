@@ -10,28 +10,39 @@ Your task is to navigate the flu database at NCBI (http://www.ncbi.nlm.nih.gov/g
 
   1. Just to get you started, first answer the following questions about the database:
 
-      a. How many different types Influenza viruses have? 3 (A,B,C)
+      a. How many different types Influenza viruses have?
+          3 (A,B,C)
 
-      b. List five host species the database considers (Avian, Bat, Blow Fly, Bovine, Camel, Cat, Ferret)
+      b. List five host species the database considers
+          (Avian, Bat, Blow Fly, Bovine, Camel, Cat, Ferret)
 
       c. How many nucleotide segments an influenza A virus contains and how many an influenza B virus contains?
+          A: 8 (PB2, PB1, PA/PA-, HA, NP, NA, MP, NS)
+          B: 8 (PB1, PB2, PA, HA, NP, NA, MP, NS)
 
-      d. What do the subtypes H and N stand for? What do the numbers in H1N1 and H3N2 stand for? H : hemagglutinin, N : neuraminidase. The numbers are the speific subtype of that protein, with there being 18 different H subtypes and 11 different N subtypes. \[CDC: www.cdc.gov/flu/about/viruses/types.htm\]
+      d. What do the subtypes H and N stand for? What do the numbers in H1N1 and H3N2 stand for?
+          H : hemagglutinin, N : neuraminidase. The numbers are the specific subtype of that protein, with there being 18 different H subtypes and 11 different N subtypes. \[CDC: www.cdc.gov/flu/about/viruses/types.htm \]
 
-      e. What makes influenza B different from influenza A? The antigenic type, with the possibilities being A, B, and C. However C only causes a mild respiratory illness and "are not thought to cause epidemics"\[CDC\]
+      e. What makes influenza B different from influenza A?
+        The antigenic type, with the possibilities being A, B, and C. However C only causes a mild respiratory illness and "are not thought to cause epidemics"\[CDC\].
 
       f. Why do we have to have flu shots every year?
+        The dominant strands of the flu change from year to year, meaning the immunity gained last year does not apply this year.
 
   2. How many full length unique nucleotide sequences of H1N1 and H3N2 isolated from people in USA from 1/1/2009 to 10/1/2014 has the database collected? How many of these collected this year?
 
-|                       | H1N1 | H3N2      | B virus |
-| --------------------- | ---- | --------- | ------- |
-| 1/1/2009 to 10/1/2014 |      |           |         |
-| This year             |      |           |         |
+  |                       | H1N1 | H3N2 | B virus |
+  | --------------------- | ---- | -----| ------- |
+  | 1/1/2009 to 10/1/2014 | 7850 | 6675 |   1799  |
+  | This year             |  670 |  478 |    196  |
 
   3. Influenza Virus Sequence Tree. Considering unique full length protein sequences coding HA proteins in this year's H1N1 flu viruses infected people in USA, build your influenza virus sequence tree using the neighbor-joining algorithm. What does the tree look like?
+    The tree is very flat with most sequences being only a few levels deep.
 
   4. What distance did you use in part 3? Change your distance measure; how much did your tree change? What's your explanation about the difference? What can you tell your friends about this years H1N1 virus based on your trees?
+    F84
+    The tree had only minor changes with only a few sequences moving. The movement was mainly in having two neighbor leaf nodes swap places, a minor negligible change
+    It is very similar acrossed the board and you should be fine after getting the flu shot.
 
   5. Repeat part 3 and 4 for H3N2 virus using the UPGMA algorithm.
 
