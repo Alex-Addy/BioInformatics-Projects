@@ -1,0 +1,3 @@
+	The goal of this project was to take a closer look at different versions of the flu and compare them to each other.  More specifically we will be looking at the H1N1 strain, H3N2 strain, and the B strain.  
+	The objectives with our in depth look will require us to study up on the influenza viruses, look at the databases, build sequence trees using the neighbor-joining algorithm.  Beyond that, we will modify those trees and look at the observable changes.  We will also make some comparisons using UPGMA.
+	Our data will come from the flu database at NCBI.  Our observations and comparisons can be found in our other paper that talks about the results of our project.
