@@ -10,9 +10,7 @@ Introduction:
 
 There are key differences between these 3 types of flu.  The A class of influenza viruses are divided into subtypes based on two proteins on the surface of the virus.  Those proteins being hemagglutinin (H) and neuraminidase (N).  Of that, there are 18 types of H and N. (H1 through H18 and N1 through N11).  As implied, that is where the classifications of A types are named.
 
-On the contrary, B class is not divided into subtypes, but they can be broken further down into strains and strains.  The current circulating B class belong of one or two lineages, B/Yamagata and B/Victoria.
-
-(source cdc.gov/flu)
+On the contrary, B class is not divided into subtypes, but they can be broken further down into strains and strains.  The current circulating B class belong of one or two lineages, B/Yamagata and B/Victoria.[2]
 
 Materials and Methods:
 Our data will come from the flu database at NCBI.  Our observations and comparisons will be obtained from using the various tools using the database.  With those tools, we will use a few different algorithms such as neighbor-joining and UPGMA. 
@@ -22,7 +20,6 @@ Neighbor Joining is a clustering method to create phylogenetic trees.  To use th
 
 UPGMA is another clustering method, used to create phenetic trees.  It is most often used to produce guide trees for sophisticated phylogenetic reconstruction algorithms.  It constructs a rooted tree that reflects the structure present in a pairwise similarity matrix.  The algorithm takes the nearest two clusters it knows and combines them into a higher-level cluster.  The distance between those clusters id the average of all distances between pairs of objects in A and B, in other words, the mean distance between elements in a cluster.[5]
 
-(source wikipedia.org)
 
  Results and discussion:
   1. Questions
@@ -73,9 +70,13 @@ We were tasked with comparing a few different strands of the flu virus.  Of the 
   [4]: http://www.wikipedia.org/Neighbor_Joining
   [5]: http://www.wikipedia.org/UPGMA
   \[1\]: http://www.ncbi.nlm.nih.gov/genomes/FLU/aboutdatabase.html
+
   \[2\]: http://www.cdc.gov/flu/about/viruses/types.htm
+  
   \[3\]: http://www.webmd.com/cold-and-flu/flu-guide/advanced-reading-types-of-flu-viruses
+  
   \[4\]: http://www.wikipedia.org/Neighbor_Joining
+  
   \[5\]: http://www.wikipedia.org/UPGMA
 
   
