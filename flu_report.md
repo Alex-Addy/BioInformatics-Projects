@@ -15,7 +15,7 @@ This report focused on studying this seasons flu strands with respect to the one
 
       d. The subtypes H and N stand for hemagglutinin and neuraminidase, respectively. The numbers are the specific subtype of that protein, with there being 18 different H subtypes and 11 different N subtypes(\[2\])[2].
 
-      e. Type A can travel through non-human hosts and is generally responsible for the large flu epidemics. Type B is found only in humans and is typically less severe.(\[2\])[2]
+      e. Type A can travel through non-human hosts and is generally responsible for the large flu epidemics. Type B is found only in humans and is typically less severe.(\[3\])[3]
 
       f. The dominant strands of the flu change from year to year, meaning the immunity gained last year does not apply this year.
 
@@ -43,6 +43,7 @@ This report focused on studying this seasons flu strands with respect to the one
 
   [1]: http://www.ncbi.nlm.nih.gov/genomes/FLU/aboutdatabase.html
   [2]: http://www.cdc.gov/flu/about/viruses/types.htm
+  [3]: http://www.webmd.com/cold-and-flu/flu-guide/advanced-reading-types-of-flu-viruses
   
 What to submit – A Report which includes:
 
