@@ -61,7 +61,7 @@ UPGMA is another clustering method, used to create phenetic trees.  It is most o
 	in subtrees.  The change in difference showed little to no change in the resulting tree.
 
   7. What additional observations have you made from the tree obtained in part 6?  
-
+	The two different strands did not show close similarities.  
     
   Conclusion:
 We were tasked with comparing a few different strands of the flu virus.  Of the 3 different types of flu virus, we looked at two strands of A and one of B.  There are a few things to note as a result.  Changing the distance measure for our experiments hardly had any impact on the results.  It would appear the the H3N2 virus is more adaptable than the H1N1 as the tree for it was deeper.  It is a little bit ironic that the non-human found strains are much more of a hazard then the strains found in humans. 
