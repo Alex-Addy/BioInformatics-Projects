@@ -1,33 +1,23 @@
-The flu season is around the corner. Although the flu activity for this year might be low [CDC], but it might pick up during the holiday season. You can find more info about the flu virus for this season at: http://www.cdc.gov/flu/ . This season's vaccine protect against the following three viruses:
+Bioinformatics Flu Project
+--------------------------
+#####By: Alex Addy, Nick Thompson, Cory Sutyak
 
-  1. an A/California/7/2009 (H1N1)pdm09-like virus
 
-  2. an A/Texas/50/2012 (H3N2)-like virus
+This report focused on studying this seasons flu strands with respect to the ones in this years flu vaccine: A/California/7/2009 (H1N1)pdm09, A/Texas/50/2012 (H3N2), and B/Massachusetts/2/2012. The results of this are as follows.
+	1.
+      a. There are three flu variants A, B, and C.
 
-  3. a B/Massachusetts/2/2012-like virus
+      b. Seven possible host species that are considered in the NCBI(\[1\])[1] database : Avian, Bat, Blow Fly, Bovine, Camel, Cat, Ferret.
 
-Your task is to navigate the flu database at NCBI (http://www.ncbi.nlm.nih.gov/genomes/FLU/aboutdatabase.html) to identify the relationship of the isolates of H1N1, H3N2, and the B virus in the past five years. Your project includes the following parts:
+      c. Both virus types contain 8 nucleotide segments listed as such:
+          A; 8 (PB2, PB1, PA/PA-, HA, NP, NA, MP, NS)
+          B; 8 (PB1, PB2, PA, HA, NP, NA, MP, NS)
 
-  1. Just to get you started, first answer the following questions about the database:
+      d. The subtypes H and N stand for hemagglutinin and neuraminidase, respectively. The numbers are the specific subtype of that protein, with there being 18 different H subtypes and 11 different N subtypes(\[2\])[2].
 
-      a. How many different types Influenza viruses have?
-          3 (A,B,C)
+      e. Type A can travel through non-human hosts and is generally responsible for the large flu epidemics. Type B is found only in humans and is typically less severe.(\[2\])[2]
 
-      b. List five host species the database considers
-          (Avian, Bat, Blow Fly, Bovine, Camel, Cat, Ferret)
-
-      c. How many nucleotide segments an influenza A virus contains and how many an influenza B virus contains?
-          A: 8 (PB2, PB1, PA/PA-, HA, NP, NA, MP, NS)
-          B: 8 (PB1, PB2, PA, HA, NP, NA, MP, NS)
-
-      d. What do the subtypes H and N stand for? What do the numbers in H1N1 and H3N2 stand for?
-          H : hemagglutinin, N : neuraminidase. The numbers are the specific subtype of that protein, with there being 18 different H subtypes and 11 different N subtypes. \[CDC: www.cdc.gov/flu/about/viruses/types.htm \]
-
-      e. What makes influenza B different from influenza A?
-        The antigenic type, with the possibilities being A, B, and C. However C only causes a mild respiratory illness and "are not thought to cause epidemics"\[CDC\].
-
-      f. Why do we have to have flu shots every year?
-        The dominant strands of the flu change from year to year, meaning the immunity gained last year does not apply this year.
+      f. The dominant strands of the flu change from year to year, meaning the immunity gained last year does not apply this year.
 
   2. How many full length unique nucleotide sequences of H1N1 and H3N2 isolated from people in USA from 1/1/2009 to 10/1/2014 has the database collected? How many of these collected this year?
 
@@ -51,6 +41,9 @@ Your task is to navigate the flu database at NCBI (http://www.ncbi.nlm.nih.gov/g
 
   7. What additional observations have you made from the tree obtained in part 6?  
 
+  [1]: http://www.ncbi.nlm.nih.gov/genomes/FLU/aboutdatabase.html
+  [2]: http://www.cdc.gov/flu/about/viruses/types.htm
+  
 What to submit – A Report which includes:
 
   Abstract - Give a brief presentation of the problem, summarize the methods, and outline your results and conclusions.
