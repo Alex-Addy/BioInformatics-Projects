@@ -2,9 +2,30 @@ Bioinformatics Flu Project
 --------------------------
 #####By: Alex Addy, Nick Thompson, Cory Sutyak
 
+Abstract:
 
-This report focused on studying this seasons flu strands with respect to the ones in this years flu vaccine: A/California/7/2009 (H1N1)pdm09, A/Texas/50/2012 (H3N2), and B/Massachusetts/2/2012. The results of this are as follows.
-	1.
+This report focused on studying this seasons flu strands with respect to the ones in this years flu vaccine: A/California/7/2009 (H1N1)pdm09, A/Texas/50/2012 (H3N2), and B/Massachusetts/2/2012. Using resources on the web, we will identify the relationship of the isolates stated above within the past 5 years.
+
+Introduction:
+
+There are key differences between these 3 types of flu.  The A class of influenza viruses are divided into subtypes based on two proteins on the surface of the virus.  Those proteins being hemagglutinin (H) and neuraminidase (N).  Of that, there are 18 types of H and N. (H1 through H18 and N1 through N11).  As implied, that is where the classifications of A types are named.
+
+On the contrary, B class is not divided into subtypes, but they can be broken further down into strains and strains.  The current circulating B class belong of one or two lineages, B/Yamagata and B/Victoria.
+
+(source cdc.gov/flu)
+
+Materials and Methods:
+Our data will come from the flu database at NCBI.  Our observations and comparisons will be obtained from using the various tools using the database.  With those tools, we will use a few different algorithms such as neighbor-joining and UPGMA. 
+
+Implementation:
+Neighbor Joining is a clustering method to create phylogenetic trees.  To use this algorithm, we need the distance between each pair of sequences.  Generally, the algorithm takes the distances and starts with a completely unresolved tree.  From there it will iterate over a set of steps until the tree is resolved and all branch lengths are known.  First it creates a matrix off of the input.  Then it finds the smallest distance between the input and joins them together.  Then it calculates the distance from each of the inputs to the new node.  Updates the rest of the distances and then starts over.
+
+UPGMA is another clustering method, used to create phenetic trees.  It is most often used to produce guide trees for sophisticated phylogenetic reconstruction algorithms.  It constructs a rooted tree that reflects the structure present in a pairwise similarity matrix.  The algorithm takes the nearest two clusters it knows and combines them into a higher-level cluster.  The distance between those clusters id the average of all distances between pairs of objects in A and B, in other words, the mean distance between elements in a cluster.
+
+(source wikipedia.org)
+
+ Results and discussion:
+  1. Questions
       a. There are three flu variants A, B, and C.
 
       b. Seven possible host species that are considered in the NCBI(\[1\])[1] database : Avian, Bat, Blow Fly, Bovine, Camel, Cat, Ferret.
@@ -41,22 +62,15 @@ This report focused on studying this seasons flu strands with respect to the one
 
   7. What additional observations have you made from the tree obtained in part 6?  
 
+    
+  Conclusion:
+We were tasked with comparing a few different strands of the flu virus.  Of the 3 different types of flu virus, we looked at two strands of A and one of B.  There are a few things to note as a result.  Changing the distance measure for our experiments hardly had any impact on the results.  It would appear the the H3N2 virus is more adaptable than the H1N1 as the tree for it was deeper.  It is a little bit ironic that the non-human found strains are much more of a hazard then the strains found in humans. 
+  
+  References:
   [1]: http://www.ncbi.nlm.nih.gov/genomes/FLU/aboutdatabase.html
   [2]: http://www.cdc.gov/flu/about/viruses/types.htm
   [3]: http://www.webmd.com/cold-and-flu/flu-guide/advanced-reading-types-of-flu-viruses
+  [4]: http://www.wikipedia.org/UPGMA
+  [5]: http://www.wikipedia.org/Neighbor_Joining
+
   
-What to submit – A Report which includes:
-
-  Abstract - Give a brief presentation of the problem, summarize the methods, and outline your results and conclusions.
-
-  Introduction - Detailed problem description and background knowledge of the problem. Outline approaches you take to solve the problem and present a short literature survey on the approaches you are taking. 
-
-  Materials and methods - Description of data acquisition, including the source. Description of the methods used, including complexity analysis of the algorithms.
-
-  Implementation - Give a high level description of your implementation of your approach.
-
-  Results and discussion - Describe and analyze the results of your computation. Use tables or graphs wherever you can.
-
-  Conclusion - Conclude your study. Summarize the main objectives and results, as in the introduction, but from the perspective of the readers who have read the main part of the report and need reminding what it is all about. 
-
-  References - Give detailed references to the sources of information. References should be actually referred to in the text. For example write "see ref. 16" if you want to refer to a book/paper for an idea you present in the report. 
